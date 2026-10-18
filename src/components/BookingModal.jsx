@@ -70,7 +70,7 @@ export default function BookingModal({ item, mode, onClose }) {
       suggestAbortRef.current = controller;
       try {
         const res = await fetch(
-          `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(value)}&filter=countrycode:in&limit=5&apiKey=${GEOAPIFY_API_KEY}`,
+          `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(value)}&filter=countrycode:in&limit=10&apiKey=${GEOAPIFY_API_KEY}`,
           { signal: controller.signal }
         );
         const data = await res.json();
@@ -112,9 +112,6 @@ export default function BookingModal({ item, mode, onClose }) {
       return setError('Enter a delivery address.');
     }
 
-    if (!addressCoords) {
-      return setError('Please select a delivery address from the suggestions.');
-    }
   }
 
   try {
@@ -125,7 +122,7 @@ export default function BookingModal({ item, mode, onClose }) {
     // WhatsApp request below still works exactly as before.
     const isDatabaseListing = /^[0-9a-fA-F]{24}$/.test(String(item.id || ''));
 
-    if (isDatabaseListing) {
+    if (isDatabaseListing && !isVehicle) {
       if (!user || !user.token) {
         return setError('Please log in to complete your booking.');
       }
@@ -170,9 +167,14 @@ export default function BookingModal({ item, mode, onClose }) {
 
     const url = `https://wa.me/919403570134?text=${encodeURIComponent(message)}`;
 
+    if (isVehicle) {
+      // Vehicle booking is a WhatsApp request, not a confirmed database booking.
+      window.location.assign(url);
+      return;
+    }
+
     setWhatsappUrl(url);
     setDone(true);
-    window.open(url, '_blank', 'noopener,noreferrer');
 
   } catch (error) {
     console.error('Booking error:', error);
@@ -180,7 +182,7 @@ export default function BookingModal({ item, mode, onClose }) {
   }
 };
 
-    const bookingDisabled = isDelivery && !addressCoords;
+    const bookingDisabled = isDelivery && !form.address.trim();
 
     return (
       <div className="modal-backdrop" role="presentation" onMouseDown={onClose}>
@@ -189,8 +191,8 @@ export default function BookingModal({ item, mode, onClose }) {
             <div className="booking-success">
               <div className="success-mark">✓</div>
               <h2>WhatsApp is ready</h2>
-              <p>We opened WhatsApp in a new tab with your booking details pre-filled. If it landed on your chats list instead of the message directly, you're likely not logged into WhatsApp Web — log in (or open the WhatsApp app on your phone) and tap the button below again to jump straight to the pre-filled chat.</p>
-              <button className="btn btn-primary full" onClick={openWhatsapp}>Open WhatsApp again →</button>
+              <p>Your booking details are ready. Click the button below to open WhatsApp with your pre-filled message, then send it to complete your request.</p>
+              <button className="btn btn-primary full" onClick={openWhatsapp}>Open WhatsApp →</button>
               <button className="text-link" onClick={onClose}>Done</button>
             </div>
           ) : (
