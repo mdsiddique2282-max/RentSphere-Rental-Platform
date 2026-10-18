@@ -167,14 +167,13 @@ export default function BookingModal({ item, mode, onClose }) {
 
     const url = `https://wa.me/919403570134?text=${encodeURIComponent(message)}`;
 
-    if (isVehicle) {
-      // Vehicle booking is a WhatsApp request, not a confirmed database booking.
-      window.location.assign(url);
-      return;
-    }
+setWhatsappUrl(url);
+setDone(true);
 
-    setWhatsappUrl(url);
-    setDone(true);
+if (isVehicle) {
+  window.open(url, '_blank');
+  return;
+}
 
   } catch (error) {
     console.error('Booking error:', error);
