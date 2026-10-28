@@ -1,0 +1,59 @@
+.owner-dashboard{padding:32px 0 40px}
+.owner-dashboard .owner-dashboard-header{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.owner-dashboard-header h1{font-size:clamp(1.8rem,3vw,2.5rem);letter-spacing:-.035em;margin:7px 0 9px}
+.owner-dashboard-header p{margin:6px 0;color:var(--muted);line-height:1.6}
+.owner-dashboard-header .owner-welcome{font-weight:600;color:var(--ink)}
+.owner-dashboard .dashboard-owner-sections{gap:22px}
+.owner-dashboard .owner-products-card,.owner-dashboard .owner-request-section{border:1px solid var(--line);border-radius:15px;background:var(--paper);padding:22px;box-shadow:0 3px 16px rgba(27,64,120,.045);min-width:0}
+.owner-dashboard .owner-products-card>h2,.owner-dashboard .owner-request-section h2{font-size:1.3rem;letter-spacing:-.02em;margin:0 0 8px}
+.owner-dashboard .dashboard-products-list{gap:16px}
+.owner-dashboard .owner-rental-card{min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:var(--paper);transition:box-shadow .18s ease,border-color .18s ease}
+.owner-dashboard .owner-rental-card:hover{border-color:#b8ccee;box-shadow:0 7px 20px rgba(27,64,120,.08)}
+.owner-dashboard .owner-rental-image{position:relative;height:180px;background:#f0f4fb}
+.owner-dashboard .owner-rental-image img{width:100%;height:100%;object-fit:cover}
+.owner-dashboard .owner-availability{position:absolute;top:12px;right:12px;border-radius:20px;padding:6px 10px;background:#e0f7ec;color:var(--green);font-size:.75rem;font-weight:700}
+.owner-dashboard .owner-availability.is-unavailable{background:#f0f2f6;color:#586579}
+.owner-dashboard .owner-rental-content{padding:16px}
+.owner-dashboard .owner-rental-content .eyebrow{font-size:.68rem}
+.owner-dashboard .owner-rental-content h3{font-size:1.08rem;line-height:1.4;margin:6px 0;overflow-wrap:anywhere}
+.owner-dashboard .owner-rental-location{font-size:.85rem;color:var(--muted);line-height:1.5;margin:0;overflow-wrap:anywhere}
+.owner-dashboard .owner-rental-price{font-size:1.2rem;font-weight:700;color:var(--blue);margin:12px 0}
+.owner-dashboard .owner-rental-price small{font-size:.78rem;font-weight:400;color:var(--muted)}
+.owner-dashboard .owner-product-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding-top:12px;border-top:1px solid var(--line);width:auto}
+.owner-dashboard .owner-product-actions>div,.owner-dashboard .owner-product-actions .decision-actions{display:contents}
+.owner-dashboard .owner-product-actions>div>small{display:none}
+.owner-dashboard .owner-product-actions .save-button,.owner-dashboard .owner-product-actions>.owner-view-link{font-size:.78rem;padding:8px 10px;line-height:1.3;min-height:34px;text-decoration:none}
+.owner-dashboard .owner-product-actions .text-link{font-size:.78rem}
+.owner-dashboard .owner-delete{color:#b34848;background:#fff8f8;border-color:#efdada}
+.owner-dashboard .owner-product-actions [aria-label="Vehicle availability calendar"]{flex-basis:100%;width:100%;box-sizing:border-box}
+.owner-dashboard .owner-request-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.owner-dashboard .owner-request-heading p{font-size:.83rem;color:var(--muted);margin:5px 0 0}
+.owner-dashboard .owner-request-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.owner-dashboard .owner-request-tools select{padding:9px 30px 9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font:inherit;font-size:.83rem}
+.owner-dashboard .owner-request-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.owner-dashboard .owner-request-card{border:1px solid var(--line);border-radius:11px;padding:16px;min-width:0;background:var(--paper)}
+.owner-dashboard .owner-request-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}
+.owner-dashboard .owner-request-card h3{font-size:.98rem;margin:0;line-height:1.4;overflow-wrap:anywhere}
+.owner-dashboard .owner-request-card .status{font-size:.64rem;padding:5px 8px;flex-shrink:0;letter-spacing:.015em}
+.owner-dashboard .owner-request-details{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px;font-size:.82rem;line-height:1.55;margin:0}
+.owner-dashboard .owner-request-details dt{color:var(--muted)}
+.owner-dashboard .owner-request-details dd{margin:0;overflow-wrap:anywhere}
+.owner-dashboard .owner-request-card .decision-actions{display:flex;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.owner-dashboard .owner-request-card .decision-actions button{padding:8px 15px;font-size:.8rem}
+.owner-dashboard .owner-request-interest{font-size:.8rem;color:var(--muted);margin:10px 0 0}
+.owner-dashboard .hosting-form .hosting-fields{gap:16px 20px}
+.owner-dashboard .hosting-form label{font-size:.85rem;color:var(--ink)}
+.owner-dashboard .hosting-form input:not([type=checkbox]),.owner-dashboard .hosting-form select,.owner-dashboard .hosting-form textarea{border-radius:9px;padding:11px 12px;transition:border-color .15s}
+.owner-dashboard .hosting-form input:focus-visible,.owner-dashboard .hosting-form select:focus-visible,.owner-dashboard .hosting-form textarea:focus-visible{outline:2px solid #cfdef7;outline-offset:1px;border-color:var(--blue)}
+.owner-dashboard .hosting-form .hosting-options{background:#f7f9fd;gap:10px;padding:15px;margin:20px 0}
+.owner-dashboard .hosting-form .hosting-options legend{font-size:.88rem;font-weight:700;padding:0 5px}
+.owner-dashboard .hosting-form .hosting-options label{padding:7px 10px;border:1px solid var(--line);border-radius:7px;background:var(--paper);font-size:.8rem}
+.owner-dashboard .hosting-form input[type=checkbox]{accent-color:var(--blue)}
+.owner-dashboard .hosting-upload{border:1px dashed #adc3e7;border-radius:10px;background:#f2f6ff;padding:16px}
+.owner-dashboard .hosting-upload small{display:block;color:var(--muted);font-weight:400;margin:5px 0 10px}
+.owner-dashboard .hosting-upload input[type=file]{background:var(--paper);border:0;font-size:.82rem}
+.owner-dashboard .hosting-upload input::file-selector-button{border:0;border-radius:6px;background:#e4ecfc;color:var(--blue);padding:8px 12px;margin-right:10px;font:inherit;cursor:pointer}
+.owner-dashboard .hosting-form .hosting-subheading{font-size:.9rem;font-weight:700;color:var(--blue);margin:2px 0 14px}
+.owner-dashboard .hosting-form .hosting-publish{padding:12px 24px;margin-top:6px}
+@media(max-width:720px){.owner-dashboard{padding:24px 0}.owner-dashboard .owner-products-card,.owner-dashboard .owner-request-section{padding:18px}.owner-dashboard .owner-request-grid{grid-template-columns:1fr}.owner-dashboard .owner-rental-image{height:170px}}
+@media(prefers-reduced-motion:reduce){.owner-dashboard .owner-rental-card{transition:none}}

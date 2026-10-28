@@ -1,0 +1,14 @@
+.dashboard-page{padding:36px 0}
+.dashboard-welcome{margin-bottom:20px}
+.dashboard-welcome h1{margin:6px 0 10px}
+.dashboard-welcome p{color:var(--muted);margin:6px 0}
+.owner-promotion{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px;border:1px solid #dbe7fc;border-radius:15px;background:#f0f5ff;margin-bottom:22px}
+.owner-promotion h2{font-size:1.2rem;margin:0 0 8px}
+.owner-promotion p{color:var(--muted);margin:0;max-width:680px;line-height:1.6}
+.owner-promotion .btn{flex-shrink:0}
+.owner-promotion.application-rejected{background:#fff7f7;border-color:#f1dddd}
+.dashboard-owner-sections{display:grid;gap:20px}
+.dashboard-products-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.dashboard-owner-sections>.info-card{margin:0}
+.dashboard-retry{padding:50px 0}
+@media(max-width:720px){.owner-promotion{align-items:flex-start;flex-direction:column;padding:18px;gap:14px}.dashboard-products-list{grid-template-columns:1fr}.dashboard-page{padding:24px 0}}

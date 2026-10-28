@@ -19,5 +19,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Neither file is required to exist locally - in production (e.g. Vercel) environment
 // variables are provided by the platform instead of a file, and dotenv.config() simply
 // no-ops when the file is missing.
-dotenv.config({ path: path.join(__dirname, '../.env') });
-dotenv.config({ path: path.join(__dirname, '.env'), override: true });
+if (process.env.RENTSPHERE_DATABASE_MODE !== 'staging') {
+  dotenv.config({ path: path.join(__dirname, '../.env'), quiet: true });
+  dotenv.config({ path: path.join(__dirname, '.env'), override: true, quiet: true });
+}

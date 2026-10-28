@@ -1,0 +1,611 @@
+{
+  "schemaVersion": 1,
+  "name": "RentSphere Delivery Service Area",
+  "retrievedOn": "2026-10-24",
+  "scope": "Custom RentSphere coverage from independent municipal/ward polygon datasets. Not an official MMR boundary, continuous 40–50 km coverage or certification of current statutory limits.",
+  "datasetFile": "delivery-service-area.geojson",
+  "datasetSha256": "730cfee6f6b5d0a5b8c0e239f093a27af0d3da121ae1066164ada2c8ec72fc7d",
+  "collectionLicense": "Collective database of independent regional source datasets, separately extractable by areaId. DataMeet components: CC BY-SA 2.5 India; OpenCity components: Public Domain as declared by publisher; OpenStreetMap components: ODbL 1.0. No cross-source geometric union, snapping or linkage is stored.",
+  "enabledAreaIds": [
+    "mumbai",
+    "navi-mumbai",
+    "mira-bhayandar",
+    "thane",
+    "kalyan-dombivli",
+    "vasai-virar",
+    "bhiwandi",
+    "panvel",
+    "ulhasnagar",
+    "ambernath",
+    "kulgaon-badlapur"
+  ],
+  "explicitlyExcludedAreas": [
+    "All locations outside the documented polygon footprints. No complete 40–50 km circle, connecting corridors, talukas or districts are implied."
+  ],
+  "verificationLimitations": [
+    "No city-name validation, guessed connecting corridors, circles, bounding boxes or district/taluka substitutions.",
+    "Historical and community-mapped municipal extents may differ from present statutory boundaries.",
+    "Source repair checks preserve the even/odd areal footprint; zero-area collapsed linework is excluded.",
+    "Retain source notices and independent per-area component licences when redistributing."
+  ],
+  "sources": [
+    {
+      "id": "mumbai",
+      "name": "Mumbai City + Mumbai Suburban",
+      "status": "enabled",
+      "url": "https://raw.githubusercontent.com/datameet/Municipal_Spatial_Data/c0e247f8e2ea3222965c445154122ab06ff49857/Mumbai/BMC_Wards.geojson",
+      "provenanceUrl": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Mumbai",
+      "readmeUrl": "https://raw.githubusercontent.com/datameet/Municipal_Spatial_Data/master/Mumbai/Readme.md",
+      "sourceSha256": "f8472efd6bfd6c845a9d8c540c675ea41c173c03de61e8475353cd0dc8242f10",
+      "commit": "c0e247f8e2ea3222965c445154122ab06ff49857",
+      "repositoryRevisionDate": "2016-08-19T12:41:52Z",
+      "datasetDate": "Not stated; repository revision is not a survey date",
+      "license": "CC BY-SA 2.5 India",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5/in/",
+      "attribution": "DataMeet India community / Pune chapter of DataMeet Trust; Mumbai City + Mumbai Suburban",
+      "featureCount": 24,
+      "conversion": "Original Polygon/MultiPolygon rings and full longitude/latitude precision retained. Only altitude ordinates removed where present. No union, simplification, buffering or gap filling.",
+      "limitations": [
+        "Historical community GIS dataset; not certified current statutory municipal limits.",
+        "Only the published polygon footprints are covered; no surrounding district or taluka included."
+      ],
+      "validation": {
+        "ringChecks": "finite WGS84 longitude/latitude, closure, minimum size, non-adjacent self-intersections/self-touches",
+        "errors": []
+      },
+      "coverageBasis": "Source identifies the intended municipality; enabled as the exact historical polygon footprint of this custom service area, not a current government boundary claim."
+    },
+    {
+      "id": "navi-mumbai",
+      "name": "Navi Mumbai Municipal Corporation",
+      "status": "enabled",
+      "url": "https://raw.githubusercontent.com/datameet/Municipal_Spatial_Data/649ecd1690199679a24715d341cb3b8a24fe5cbb/NMMC/NMC_ElectoralWards.geojson",
+      "provenanceUrl": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/NMMC",
+      "readmeUrl": "https://raw.githubusercontent.com/datameet/Municipal_Spatial_Data/master/NMMC/Readme.md",
+      "sourceSha256": "fce7a0a690c3981dce8e40ebd756ce2b69378a79328a65a5b9320bbac7090bbb",
+      "commit": "649ecd1690199679a24715d341cb3b8a24fe5cbb",
+      "repositoryRevisionDate": "2016-08-19T13:20:06Z",
+      "datasetDate": "2015-03-18 (associated KML filename)",
+      "license": "CC BY-SA 2.5 India",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5/in/",
+      "attribution": "DataMeet India community / Pune chapter of DataMeet Trust; Navi Mumbai Municipal Corporation",
+      "featureCount": 111,
+      "conversion": "Remove altitude only. Normalize invalid rings using GEOS source linework and verify each polygonized face against high-precision even/odd containment of the original ring. Reject extra filled faces. Zero-area collapsed lines do not grant coverage. No buffers, snapping, simplification, rounding, connecting corridors or gap filling.",
+      "limitations": [
+        "Historical community GIS dataset; not certified current statutory municipal limits.",
+        "Only the published polygon footprints are covered; no surrounding district or taluka included."
+      ],
+      "validation": {
+        "engine": "Shapely 2.1.2 / GEOS 3.13.1",
+        "errors": [],
+        "allFeaturesValid": true,
+        "repairCount": 11,
+        "repairs": [
+          {
+            "sourceFeatureId": "1",
+            "originalValidity": "Self-intersection[73.009802767039 19.1822483171679]",
+            "resultType": "MultiPolygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 0.0,
+            "discardedZeroAreaGeometryTypes": []
+          },
+          {
+            "sourceFeatureId": "51",
+            "originalValidity": "Self-intersection[73.0054567647808 19.0973986922234]",
+            "resultType": "MultiPolygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 0.0,
+            "discardedZeroAreaGeometryTypes": []
+          },
+          {
+            "sourceFeatureId": "58",
+            "originalValidity": "Self-intersection[73.0035418665876 19.0799225427924]",
+            "resultType": "MultiPolygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 3.552713678800501e-15,
+            "discardedZeroAreaGeometryTypes": []
+          },
+          {
+            "sourceFeatureId": "60",
+            "originalValidity": "Self-intersection[72.9965910245673 19.0790890430074]",
+            "resultType": "MultiPolygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 3.552713678800501e-15,
+            "discardedZeroAreaGeometryTypes": []
+          },
+          {
+            "sourceFeatureId": "62",
+            "originalValidity": "Self-intersection[73.0029750966098 19.0786642055988]",
+            "resultType": "Polygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 3.552713678800501e-15,
+            "discardedZeroAreaGeometryTypes": []
+          },
+          {
+            "sourceFeatureId": "89",
+            "originalValidity": "Self-intersection[73.0220771160779 19.0448523249551]",
+            "resultType": "MultiPolygon",
+            "method": "noded source-linework polygonization with 60-digit even/odd face classification",
+            "makeValidCandidateDifferenceSquareDegrees": 4.112022404528435e-11,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 3.9772077674941325e-06,
+            "discardedZeroAreaGeometryTypes": [
+              "MultiLineString"
+            ]
+          },
+          {
+            "sourceFeatureId": "93",
+            "originalValidity": "Self-intersection[73.0139939372578 19.0328818734086]",
+            "resultType": "Polygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 0.0,
+            "discardedZeroAreaGeometryTypes": []
+          },
+          {
+            "sourceFeatureId": "97",
+            "originalValidity": "Self-intersection[73.0145448538501 19.0309009922799]",
+            "resultType": "MultiPolygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 0.0,
+            "discardedZeroAreaGeometryTypes": []
+          },
+          {
+            "sourceFeatureId": "98",
+            "originalValidity": "Self-intersection[72.9970131056508 19.0237842380632]",
+            "resultType": "Polygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 0.0,
+            "discardedZeroAreaGeometryTypes": []
+          },
+          {
+            "sourceFeatureId": "99",
+            "originalValidity": "Self-intersection[73.0241276976896 19.0237647202876]",
+            "resultType": "MultiPolygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 0.0,
+            "discardedZeroAreaGeometryTypes": []
+          },
+          {
+            "sourceFeatureId": "111",
+            "originalValidity": "Self-intersection[73.0041144150697 19.0018652177659]",
+            "resultType": "MultiPolygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 0.0,
+            "discardedZeroAreaGeometryTypes": []
+          }
+        ]
+      },
+      "coverageBasis": "Historical source footprint preserved under its even/odd areal interpretation; topology normalized, not an expansion to current statutory municipal limits."
+    },
+    {
+      "id": "mira-bhayandar",
+      "name": "Mira-Bhayandar Municipal Corporation",
+      "status": "enabled",
+      "url": "https://raw.githubusercontent.com/datameet/Municipal_Spatial_Data/4fa93e5a0599957bf3585219fa14f26c48d32ce0/Mira-Bhayandar/Mira-Bhayandar.geojson",
+      "provenanceUrl": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Mira-Bhayandar",
+      "readmeUrl": "https://raw.githubusercontent.com/datameet/Municipal_Spatial_Data/master/Mira-Bhayandar/Readme.md",
+      "sourceSha256": "e995a878201a3863cf63f1c0695f9ea34b1c28a43c51544f3f0df7cbf7b6bdad",
+      "commit": "4fa93e5a0599957bf3585219fa14f26c48d32ce0",
+      "repositoryRevisionDate": "2020-05-19T12:34:05Z",
+      "datasetDate": "Not stated; repository revision is not a survey date",
+      "license": "CC BY-SA 2.5 India",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5/in/",
+      "attribution": "DataMeet India community / Pune chapter of DataMeet Trust; Mira-Bhayandar Municipal Corporation",
+      "featureCount": 1,
+      "conversion": "Remove altitude only. Normalize invalid rings using GEOS source linework and verify each polygonized face against high-precision even/odd containment of the original ring. Reject extra filled faces. Zero-area collapsed lines do not grant coverage. No buffers, snapping, simplification, rounding, connecting corridors or gap filling.",
+      "limitations": [
+        "Historical community GIS dataset; not certified current statutory municipal limits.",
+        "Only the published polygon footprints are covered; no surrounding district or taluka included."
+      ],
+      "validation": {
+        "engine": "Shapely 2.1.2 / GEOS 3.13.1",
+        "errors": [],
+        "allFeaturesValid": true,
+        "repairCount": 1,
+        "repairs": [
+          {
+            "sourceFeatureId": "1",
+            "originalValidity": "Self-intersection[72.7812207394205 19.258985767586]",
+            "resultType": "MultiPolygon",
+            "method": "GEOS make_valid linework, independently checked against source even/odd faces",
+            "makeValidCandidateDifferenceSquareDegrees": 0.0,
+            "verifiedSourceFootprintDifferenceSquareDegrees": 0.0,
+            "sourceBoundaryHausdorffDegrees": 0.0,
+            "discardedZeroAreaGeometryTypes": []
+          }
+        ]
+      },
+      "coverageBasis": "Historical source footprint preserved under its even/odd areal interpretation; topology normalized, not an expansion to current statutory municipal limits."
+    },
+    {
+      "id": "thane",
+      "name": "Thane Municipal Corporation",
+      "status": "enabled",
+      "url": "https://data.opencity.in/dataset/03db6016-c665-4c05-99da-86188f80a46d/resource/c426c5c2-a179-46e4-8349-857248e63613/download/bec13773-610a-402c-838a-8d2056eb4036.kml",
+      "provenanceUrl": "https://data.opencity.in/dataset/thane-wards-map",
+      "metadataUrl": "https://data.opencity.in/api/3/action/package_show?id=thane-wards-map",
+      "upstreamSourceReportedByPublisher": "livingatlas.esri.in",
+      "sourceSha256": "5ee1a29bea89130a7e85d25466476e6acfc86102bda721f49b260e9525583241",
+      "datasetDate": "2023 (publisher resource title)",
+      "resourceUpdatedAt": "2025-11-25T16:09:05.810272",
+      "catalogueUpdatedAt": "2025-11-27T12:38:40.748844",
+      "license": "Public Domain (as declared by OpenCity catalogue and resource metadata)",
+      "licenseUrl": "https://data.opencity.in/api/3/action/package_show?id=thane-wards-map",
+      "attribution": "OpenCity.in; upstream source reported as Esri India Living Atlas; Thane Municipal Corporation",
+      "featureCount": 47,
+      "conversion": "KML parsed with XML ElementTree; every Placemark Polygon retained, including innerBoundaryIs holes and MultiGeometry disconnected polygons. Longitude/latitude order and all numeric precision retained. Altitude removed only. No simplification, union, buffering or gap filling.",
+      "limitations": [
+        "Publisher declares Public Domain; original upstream licence and survey date not independently established.",
+        "Historical electoral ward footprint; not certified current statutory municipal limits.",
+        "Only the supplied ward polygon footprints are covered."
+      ],
+      "validation": {
+        "ringChecks": "finite WGS84 longitude/latitude, closure, minimum size, non-adjacent self-intersections/self-touches",
+        "errors": []
+      },
+      "coverageBasis": "Source identifies the intended municipality; enabled as the exact historical polygon footprint of this custom service area, not a current government boundary claim."
+    },
+    {
+      "id": "kalyan-dombivli",
+      "name": "Kalyan-Dombivli Municipal Corporation",
+      "status": "enabled",
+      "url": "https://data.opencity.in/dataset/782e0847-fe22-42be-9cdc-373f15a23db8/resource/62e8a1fd-3c2a-4095-8528-98c989615be8/download/0063f553-c265-402d-9f15-feea2929c7a5.kml",
+      "provenanceUrl": "https://data.opencity.in/dataset/kalyan-dombivli-wards-map",
+      "metadataUrl": "https://data.opencity.in/api/3/action/package_show?id=kalyan-dombivli-wards-map",
+      "upstreamSourceReportedByPublisher": "livingatlas.esri.in",
+      "sourceSha256": "5796ddf9371f016d75e0c2d6f44720533161ecddfb6830c2413eafb7585e23eb",
+      "datasetDate": "Not stated",
+      "resourceUpdatedAt": "2025-11-25T14:25:13.212885",
+      "catalogueUpdatedAt": "2025-11-27T12:38:40.435769",
+      "license": "Public Domain (as declared by OpenCity catalogue and resource metadata)",
+      "licenseUrl": "https://data.opencity.in/api/3/action/package_show?id=kalyan-dombivli-wards-map",
+      "attribution": "OpenCity.in; upstream source reported as Esri India Living Atlas; Kalyan-Dombivli Municipal Corporation",
+      "featureCount": 123,
+      "conversion": "KML parsed with XML ElementTree; every Placemark Polygon retained, including innerBoundaryIs holes and MultiGeometry disconnected polygons. Longitude/latitude order and all numeric precision retained. Altitude removed only. No simplification, union, buffering or gap filling.",
+      "limitations": [
+        "Publisher declares Public Domain; original upstream licence and survey date not independently established.",
+        "Historical electoral ward footprint; not certified current statutory municipal limits.",
+        "Only the supplied ward polygon footprints are covered."
+      ],
+      "validation": {
+        "ringChecks": "finite WGS84 longitude/latitude, closure, minimum size, non-adjacent self-intersections/self-touches",
+        "errors": []
+      },
+      "coverageBasis": "Source identifies the intended municipality; enabled as the exact historical polygon footprint of this custom service area, not a current government boundary claim."
+    },
+    {
+      "id": "vasai-virar",
+      "name": "Vasai-Virar",
+      "status": "enabled",
+      "url": "https://www.openstreetmap.org/relation/13253971",
+      "provenanceUrl": "https://www.openstreetmap.org/relation/13253971",
+      "downloadUrl": "https://nominatim.openstreetmap.org/lookup?format=jsonv2&polygon_geojson=1&polygon_threshold=0&osm_ids=R13253971,R13184109,R13182526,R13184432,R13184373,R7119985",
+      "metadataUrl": "https://www.openstreetmap.org/api/0.6/relation/13253971.json",
+      "geometrySha256": "97849cb95f81125245848bf6f769bc5db9503c61860abab585ada5c38e8c22ab",
+      "osmRelationId": 13253971,
+      "osmRelationVersion": 6,
+      "relationEditedAt": "2022-08-08T16:13:36Z",
+      "datasetDate": "Geometry snapshot retrieved 2026-10-24; relation edit date does not include all member-way edits.",
+      "license": "Open Database License 1.0 (ODbL)",
+      "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "© OpenStreetMap contributors; https://www.openstreetmap.org/relation/13253971",
+      "featureCount": 1,
+      "scopeTags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Vasai-Virar",
+        "type": "boundary",
+        "wikidata": "Q580876"
+      },
+      "representativePin": {
+        "lat": 19.40729305,
+        "lon": 72.85569980450245
+      },
+      "conversion": "Un-simplified WGS84 geometry of this exact administrative relation; no shape editing, cross-source union, buffering, district substitution or gap filling.",
+      "validation": {
+        "engine": "Shapely 2.1.2 / GEOS 3.13.1",
+        "errors": [],
+        "valid": true,
+        "administrativeLevel": "8"
+      },
+      "limitations": [
+        "Community-mapped municipal footprint, not government-certified current statutory limits.",
+        "Only this exact polygon is included, not an entire surrounding taluka/district or a radius.",
+        "Independent OSM regional database component, separately identifiable/extractable by areaId; retain ODbL attribution and licence."
+      ]
+    },
+    {
+      "id": "bhiwandi",
+      "name": "Bhiwandi-Nizampur",
+      "status": "enabled",
+      "url": "https://www.openstreetmap.org/relation/13184109",
+      "provenanceUrl": "https://www.openstreetmap.org/relation/13184109",
+      "downloadUrl": "https://nominatim.openstreetmap.org/lookup?format=jsonv2&polygon_geojson=1&polygon_threshold=0&osm_ids=R13253971,R13184109,R13182526,R13184432,R13184373,R7119985",
+      "metadataUrl": "https://www.openstreetmap.org/api/0.6/relation/13184109.json",
+      "geometrySha256": "5658d7bab1d6b3c5415fd5cdd27bebd233ca0ac4319b0b091345327f7dbd2d8c",
+      "osmRelationId": 13184109,
+      "osmRelationVersion": 3,
+      "relationEditedAt": "2022-06-14T14:31:17Z",
+      "datasetDate": "Geometry snapshot retrieved 2026-10-24; relation edit date does not include all member-way edits.",
+      "license": "Open Database License 1.0 (ODbL)",
+      "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "© OpenStreetMap contributors; https://www.openstreetmap.org/relation/13184109",
+      "featureCount": 1,
+      "scopeTags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Bhiwandi - Nizampur",
+        "type": "boundary"
+      },
+      "representativePin": {
+        "lat": 19.294067,
+        "lon": 73.06644757327854
+      },
+      "conversion": "Un-simplified WGS84 geometry of this exact administrative relation; no shape editing, cross-source union, buffering, district substitution or gap filling.",
+      "validation": {
+        "engine": "Shapely 2.1.2 / GEOS 3.13.1",
+        "errors": [],
+        "valid": true,
+        "administrativeLevel": "8"
+      },
+      "limitations": [
+        "Community-mapped municipal footprint, not government-certified current statutory limits.",
+        "Only this exact polygon is included, not an entire surrounding taluka/district or a radius.",
+        "Independent OSM regional database component, separately identifiable/extractable by areaId; retain ODbL attribution and licence."
+      ]
+    },
+    {
+      "id": "panvel",
+      "name": "Panvel",
+      "status": "enabled",
+      "url": "https://www.openstreetmap.org/relation/13182526",
+      "provenanceUrl": "https://www.openstreetmap.org/relation/13182526",
+      "downloadUrl": "https://nominatim.openstreetmap.org/lookup?format=jsonv2&polygon_geojson=1&polygon_threshold=0&osm_ids=R13253971,R13184109,R13182526,R13184432,R13184373,R7119985",
+      "metadataUrl": "https://www.openstreetmap.org/api/0.6/relation/13182526.json",
+      "geometrySha256": "5dec9b9b175164a54138eee68f3d75b61f422a4b8c79e846f75bd3ff131116ba",
+      "osmRelationId": 13182526,
+      "osmRelationVersion": 5,
+      "relationEditedAt": "2023-06-27T12:52:26Z",
+      "datasetDate": "Geometry snapshot retrieved 2026-10-24; relation edit date does not include all member-way edits.",
+      "license": "Open Database License 1.0 (ODbL)",
+      "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "© OpenStreetMap contributors; https://www.openstreetmap.org/relation/13182526",
+      "featureCount": 1,
+      "scopeTags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Panvel",
+        "type": "boundary",
+        "wikidata": "Q297511",
+        "wikipedia": "en:Panvel"
+      },
+      "representativePin": {
+        "lat": 19.0416277,
+        "lon": 73.08574107497708
+      },
+      "conversion": "Un-simplified WGS84 geometry of this exact administrative relation; no shape editing, cross-source union, buffering, district substitution or gap filling.",
+      "validation": {
+        "engine": "Shapely 2.1.2 / GEOS 3.13.1",
+        "errors": [],
+        "valid": true,
+        "administrativeLevel": "8"
+      },
+      "limitations": [
+        "Community-mapped municipal footprint, not government-certified current statutory limits.",
+        "Only this exact polygon is included, not an entire surrounding taluka/district or a radius.",
+        "Independent OSM regional database component, separately identifiable/extractable by areaId; retain ODbL attribution and licence."
+      ]
+    },
+    {
+      "id": "ulhasnagar",
+      "name": "Ulhasnagar",
+      "status": "enabled",
+      "url": "https://www.openstreetmap.org/relation/13184432",
+      "provenanceUrl": "https://www.openstreetmap.org/relation/13184432",
+      "downloadUrl": "https://nominatim.openstreetmap.org/lookup?format=jsonv2&polygon_geojson=1&polygon_threshold=0&osm_ids=R13253971,R13184109,R13182526,R13184432,R13184373,R7119985",
+      "metadataUrl": "https://www.openstreetmap.org/api/0.6/relation/13184432.json",
+      "geometrySha256": "7fe3130a0fac6f9c5aa6496070e99eaf3c5ea88db16b51987686beda957f5277",
+      "osmRelationId": 13184432,
+      "osmRelationVersion": 4,
+      "relationEditedAt": "2023-06-11T18:31:55Z",
+      "datasetDate": "Geometry snapshot retrieved 2026-10-24; relation edit date does not include all member-way edits.",
+      "license": "Open Database License 1.0 (ODbL)",
+      "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "© OpenStreetMap contributors; https://www.openstreetmap.org/relation/13184432",
+      "featureCount": 1,
+      "scopeTags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Ulhasnagar",
+        "type": "boundary",
+        "wikidata": "Q460222",
+        "wikipedia": "en:Ulhasnagar"
+      },
+      "representativePin": {
+        "lat": 19.222822800000003,
+        "lon": 73.16121705417291
+      },
+      "conversion": "Un-simplified WGS84 geometry of this exact administrative relation; no shape editing, cross-source union, buffering, district substitution or gap filling.",
+      "validation": {
+        "engine": "Shapely 2.1.2 / GEOS 3.13.1",
+        "errors": [],
+        "valid": true,
+        "administrativeLevel": "8"
+      },
+      "limitations": [
+        "Community-mapped municipal footprint, not government-certified current statutory limits.",
+        "Only this exact polygon is included, not an entire surrounding taluka/district or a radius.",
+        "Independent OSM regional database component, separately identifiable/extractable by areaId; retain ODbL attribution and licence."
+      ]
+    },
+    {
+      "id": "ambernath",
+      "name": "Ambernath",
+      "status": "enabled",
+      "url": "https://www.openstreetmap.org/relation/13184373",
+      "provenanceUrl": "https://www.openstreetmap.org/relation/13184373",
+      "downloadUrl": "https://nominatim.openstreetmap.org/lookup?format=jsonv2&polygon_geojson=1&polygon_threshold=0&osm_ids=R13253971,R13184109,R13182526,R13184432,R13184373,R7119985",
+      "metadataUrl": "https://www.openstreetmap.org/api/0.6/relation/13184373.json",
+      "geometrySha256": "7ff71dfda6550862028ae9721511e9c7afc272c01a501e9d0b054e5567bdf7dc",
+      "osmRelationId": 13184373,
+      "osmRelationVersion": 6,
+      "relationEditedAt": "2023-06-11T18:31:55Z",
+      "datasetDate": "Geometry snapshot retrieved 2026-10-24; relation edit date does not include all member-way edits.",
+      "license": "Open Database License 1.0 (ODbL)",
+      "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "© OpenStreetMap contributors; https://www.openstreetmap.org/relation/13184373",
+      "featureCount": 1,
+      "scopeTags": {
+        "admin_level": "8",
+        "alt_name": "Ambarnath",
+        "boundary": "administrative",
+        "name": "Ambernath",
+        "type": "boundary",
+        "wikidata": "Q584008",
+        "wikipedia": "en:Ambarnath"
+      },
+      "representativePin": {
+        "lat": 19.1869614,
+        "lon": 73.19734412719822
+      },
+      "conversion": "Un-simplified WGS84 geometry of this exact administrative relation; no shape editing, cross-source union, buffering, district substitution or gap filling.",
+      "validation": {
+        "engine": "Shapely 2.1.2 / GEOS 3.13.1",
+        "errors": [],
+        "valid": true,
+        "administrativeLevel": "8"
+      },
+      "limitations": [
+        "Community-mapped municipal footprint, not government-certified current statutory limits.",
+        "Only this exact polygon is included, not an entire surrounding taluka/district or a radius.",
+        "Independent OSM regional database component, separately identifiable/extractable by areaId; retain ODbL attribution and licence."
+      ]
+    },
+    {
+      "id": "kulgaon-badlapur",
+      "name": "Kulgaon-Badlapur",
+      "status": "enabled",
+      "url": "https://www.openstreetmap.org/relation/7119985",
+      "provenanceUrl": "https://www.openstreetmap.org/relation/7119985",
+      "downloadUrl": "https://nominatim.openstreetmap.org/lookup?format=jsonv2&polygon_geojson=1&polygon_threshold=0&osm_ids=R13253971,R13184109,R13182526,R13184432,R13184373,R7119985",
+      "metadataUrl": "https://www.openstreetmap.org/api/0.6/relation/7119985.json",
+      "geometrySha256": "c4c751f075f4d161b3cd41630b048b28c29bbf3c0a39d5b1f6418121e116a535",
+      "osmRelationId": 7119985,
+      "osmRelationVersion": 4,
+      "relationEditedAt": "2023-06-11T18:31:55Z",
+      "datasetDate": "Geometry snapshot retrieved 2026-10-24; relation edit date does not include all member-way edits.",
+      "license": "Open Database License 1.0 (ODbL)",
+      "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "© OpenStreetMap contributors; https://www.openstreetmap.org/relation/7119985",
+      "featureCount": 1,
+      "scopeTags": {
+        "admin_level": "8",
+        "boundary": "administrative",
+        "name": "Kulgaon Badlapur",
+        "type": "boundary",
+        "wikidata": "Q588612",
+        "wikipedia": "en:Badlapur"
+      },
+      "representativePin": {
+        "lat": 19.165579700000002,
+        "lon": 73.2456454779519
+      },
+      "conversion": "Un-simplified WGS84 geometry of this exact administrative relation; no shape editing, cross-source union, buffering, district substitution or gap filling.",
+      "validation": {
+        "engine": "Shapely 2.1.2 / GEOS 3.13.1",
+        "errors": [],
+        "valid": true,
+        "administrativeLevel": "8"
+      },
+      "limitations": [
+        "Community-mapped municipal footprint, not government-certified current statutory limits.",
+        "Only this exact polygon is included, not an entire surrounding taluka/district or a radius.",
+        "Independent OSM regional database component, separately identifiable/extractable by areaId; retain ODbL attribution and licence."
+      ]
+    }
+  ],
+  "regressionSamples": [
+    {
+      "name": "Government Polytechnic Mumbai",
+      "pin": {
+        "lat": 19.0636498,
+        "lon": 72.8456276
+      },
+      "sourceUrl": "https://www.openstreetmap.org/way/291324675",
+      "insidePreviousCoverage": true,
+      "insideExpandedCoverage": true
+    },
+    {
+      "name": "Kalyan West",
+      "pin": {
+        "lat": 19.240353,
+        "lon": 73.1252789
+      },
+      "sourceUrl": "https://www.openstreetmap.org/node/10247312859",
+      "insidePreviousCoverage": true,
+      "insideExpandedCoverage": true
+    },
+    {
+      "name": "Kalyan East",
+      "pin": {
+        "lat": 19.2278526,
+        "lon": 73.1322955
+      },
+      "sourceUrl": "https://www.openstreetmap.org/node/10247312858",
+      "insidePreviousCoverage": true,
+      "insideExpandedCoverage": true
+    },
+    {
+      "name": "Dombivli East",
+      "pin": {
+        "lat": 19.2111814,
+        "lon": 73.091129
+      },
+      "sourceUrl": "https://www.openstreetmap.org/node/2629924560",
+      "insidePreviousCoverage": true,
+      "insideExpandedCoverage": true
+    },
+    {
+      "name": "Dombivli West",
+      "pin": {
+        "lat": 19.2221822,
+        "lon": 73.0809274
+      },
+      "sourceUrl": "https://www.openstreetmap.org/node/2629924561",
+      "insidePreviousCoverage": true,
+      "insideExpandedCoverage": true
+    }
+  ],
+  "licensingReferences": [
+    "https://creativecommons.org/licenses/by-sa/2.5/in/",
+    "https://opendatacommons.org/licenses/odbl/1-0/",
+    "https://osmfoundation.org/wiki/Licence/Community_Guidelines/Collective_Database_Guideline_Guideline",
+    "https://osmfoundation.org/wiki/Licence/Attribution_Guidelines"
+  ],
+  "preservationVerification": {
+    "priorDatasetSha256": "7167130b54a51b2ea0da45469f89f663783f0a3a7a0e588570a7fda34003cc8d",
+    "priorFeatureCount": 194,
+    "allPriorFeaturesRetainedUnmodified": true,
+    "lostPriorCoverageSquareDegrees": 0.0
+  }
+}

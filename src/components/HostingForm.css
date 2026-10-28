@@ -1,0 +1,21 @@
+.hosting-form .hosting-body{border:0;padding:0;margin:0;min-width:0}
+.hosting-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.hosting-form label{font-size:.88rem;font-weight:600;min-width:0}
+.hosting-form input:not([type=checkbox]),.hosting-form select,.hosting-form textarea{display:block;box-sizing:border-box;width:100%;margin-top:5px;padding:10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:inherit;font:inherit;font-weight:400}
+.hosting-form textarea{resize:vertical}
+.hosting-options{display:flex;flex-wrap:wrap;gap:10px 14px;border:1px solid var(--line);border-radius:8px;padding:12px;margin:16px 0}
+.hosting-options label{display:flex;align-items:center;gap:6px;font-weight:400}
+.hosting-custom-row{display:flex;align-items:flex-end;gap:8px;flex-wrap:wrap}.hosting-custom-row label{flex:1;min-width:150px}.hosting-custom-row button{flex:0 0 auto;min-height:40px}.hosting-choice-chips{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0}.hosting-choice-chip{display:inline-flex;align-items:center;gap:8px;max-width:100%;overflow-wrap:anywhere;border:1px solid var(--line);border-radius:16px;padding:5px 10px;background:var(--wash);color:var(--ink);font:inherit;font-size:.78rem;cursor:pointer}.hosting-choice-chip span{font-size:1rem}
+.hosting-description{display:block;margin:14px 0}
+.hosting-images{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.hosting-images>div{position:relative;width:70px;height:70px}
+.hosting-images img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.hosting-images button{position:absolute;right:2px;top:2px;border:0;border-radius:50%;background:#222;color:#fff;cursor:pointer}
+#hosting-form{scroll-margin-top:100px}
+.owner-products-card{min-width:0}
+.owner-product{display:flex;flex-wrap:wrap;gap:12px;padding:14px;border:1px solid var(--line);border-radius:10px}
+.owner-product>img{width:72px;height:60px;object-fit:cover;border-radius:8px}
+.owner-product-summary{flex:1;min-width:140px;overflow-wrap:anywhere}
+.owner-product-actions{width:100%}
+.owner-edit-modal{max-height:90vh;overflow-y:auto}
+@media(max-width:540px){.hosting-fields{grid-template-columns:1fr}.owner-products-card{padding:18px!important}}

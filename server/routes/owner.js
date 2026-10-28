@@ -1,6 +1,8 @@
+import { ownerProfileErrors, ownerDocumentErrors, ownerFileError, validOwnerPhone } from '../../src/data/ownerPolicy.js';
 import express from 'express';
+import { normalizeEmail, validEmail, validNewPassword, emailFilter } from '../utils/accountValidation.js';
 import mongoose from 'mongoose';
-import { generateToken, verifyToken } from '../utils/tokens.js';
+import { generateToken, verifyToken, sessionIsCurrent } from '../utils/tokens.js';
 import multer from 'multer';
 import User from '../models/User.js';
 import { storeOwnerDocuments, serveOwnerDocument } from '../utils/ownerDocuments.js';
@@ -53,7 +55,7 @@ const protect = async (req, res, next) => {
 
   try {
     const user = await fastQuery(User.findById(decoded.id).select('-password'), 5000);
-    if (!user) {
+    if (!user || !sessionIsCurrent(decoded, user)) {
       return res.status(401).json({ message: 'Not authorized, user no longer exists.' });
     }
     req.user = user;
@@ -112,7 +114,8 @@ const buildOwnerView = async (mongoUser, email) => {
 // POST /api/owner/start instead.
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password, phone } = req.body;
+    const { name, email: submittedEmail, password, phone } = req.body || {};
+    const email = normalizeEmail(submittedEmail);
 
     if (typeof name !== 'string' || typeof email !== 'string' || typeof password !== 'string' ||
         !name.trim() || !email.trim() || !password) {
@@ -123,7 +126,9 @@ router.post('/register', async (req, res) => {
       return res.status(503).json({ message: 'Service temporarily unavailable. Please try again shortly.' });
     }
 
-    const userExists = await fastQuery(User.findOne({ email }));
+    if (!validEmail(email) || !validNewPassword(password)) return res.status(400).json({ message: 'A valid email and password of at least 6 characters (maximum 72 UTF-8 bytes) are required.' });
+    if (!validOwnerPhone(phone)) return res.status(400).json({ message: 'Please enter a valid 10-digit Indian mobile number.', errors: { phone: 'Please enter a valid 10-digit Indian mobile number.' } });
+    const userExists = await fastQuery(User.findOne(emailFilter(email)));
     if (userExists) {
       return res.status(400).json({ message: 'An account with this email already exists. Please log in and continue onboarding from your dashboard.' });
     }
@@ -145,10 +150,11 @@ router.post('/register', async (req, res) => {
       name: user.name,
       email: user.email,
       role: user.role,
-      token: generateToken(user._id),
+      token: generateToken(user._id, user.authVersion),
       ownerProfile: user.ownerProfile
     });
   } catch (error) {
+    if (error.code === 11000) return res.status(400).json({ message: 'An account with this email already exists.' });
     console.error('Owner register error:', error.message);
     res.status(500).json({ message: 'Could not start owner registration. Please try again.' });
   }
@@ -160,14 +166,15 @@ router.post('/start', protect, async (req, res) => {
     if (mongoose.connection.readyState === 1 && mongoose.Types.ObjectId.isValid(req.user._id)) {
       const user = await fastQuery(User.findById(req.user._id));
       if (user) {
+        if (user.role === 'user' && user.ownerProfile?.status === 'approved') return res.status(409).json({ message: 'This legacy approval needs administrator review before owner access can be granted.' });
         if (user.role !== 'admin') user.role = 'owner';
-        if (!user.ownerProfile || user.ownerProfile.status === 'not_started') {
+        if (!user.ownerProfile || ['not_started', 'revoked'].includes(user.ownerProfile.status)) {
           user.ownerProfile = { ...(user.ownerProfile?.toObject?.() || {}), currentStep: 2, status: 'in_progress' };
         }
         await user.save();
         return res.json({
           _id: user._id, name: user.name, email: user.email, role: user.role,
-          token: generateToken(user._id), ownerProfile: user.ownerProfile
+          token: generateToken(user._id, user.authVersion), ownerProfile: user.ownerProfile
         });
       }
     }
@@ -195,95 +202,49 @@ router.get('/me', protect, async (req, res) => {
   }
 });
 
-// ---------- STEP 2: Owner Profile ----------
-router.put('/profile', protect, async (req, res) => {
+
+const mutableApplication = (req, res, next) => {
+  if (req.user.role === 'admin' || ['pending', 'approved'].includes(req.user.ownerProfile?.status)) return res.status(409).json({ message: 'Submitted and approved applications are view-only.' });
+  next();
+};
+const mutationFilter = user => ({ _id: user._id, role: { $ne: 'admin' }, 'ownerProfile.status': { $nin: ['pending', 'approved'] } });
+const invalid = (res, errors) => res.status(400).json({ message: Object.values(errors)[0], errors });
+
+router.put('/profile', protect, mutableApplication, async (req, res) => {
   try {
-    const { phone, businessName, address, city, state, bio, listingIntent } = req.body;
-    const profileUpdate = { phone, businessName, address, city, state, bio, listingIntent, currentStep: 3 };
-
-    if (mongoose.connection.readyState === 1 && mongoose.Types.ObjectId.isValid(req.user._id)) {
-      const user = await fastQuery(User.findById(req.user._id));
-      if (user) {
-        user.ownerProfile = {
-          ...(user.ownerProfile?.toObject?.() || {}),
-          ...profileUpdate,
-          status: user.ownerProfile?.status === 'not_started' ? 'in_progress' : (user.ownerProfile?.status || 'in_progress')
-        };
-        if (user.role !== 'admin') user.role = 'owner';
-        await user.save();
-        return res.json({ ownerProfile: user.ownerProfile });
-      }
-    }
-
-    const app = upsertOwnerApp(req.user.email, { ...profileUpdate, status: 'in_progress' });
-    res.json({ ownerProfile: app });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+    const body = req.body || {}, errors = ownerProfileErrors(body);
+    if (Object.keys(errors).length) return invalid(res, errors);
+    const fields = Object.fromEntries(['phone','businessName','address','city','state','bio','listingIntent'].map(key => ['ownerProfile.' + key, typeof body[key] === 'string' ? body[key].trim() : '']));
+    const user = await User.findOneAndUpdate(mutationFilter(req.user), { $set: { ...fields, role: 'owner', 'ownerProfile.status': req.user.ownerProfile?.status === 'rejected' ? 'rejected' : 'in_progress' }, $max: { 'ownerProfile.currentStep': 3 } }, { returnDocument: 'after', runValidators: true });
+    if (!user) return res.status(409).json({ message: 'Application changed. Refresh before editing.' });
+    res.json({ ownerProfile: user.ownerProfile });
+  } catch { res.status(503).json({ message: 'Unable to save your profile. Please retry.' }); }
 });
 
-// ---------- STEP 3: Owner submits information (ID proof + supporting documents) ----------
-router.post('/documents', protect, upload.array('documents', 5), async (req, res) => {
+const documentsUpload = upload.array('documents', 5);
+router.post('/documents', protect, mutableApplication, (req, res, next) => documentsUpload(req, res, error => error ? res.status(400).json({ message: error.code === 'LIMIT_FILE_SIZE' ? 'Each document must be 5 MB or smaller.' : 'Choose at most 5 image/PDF documents, up to 5 MB each.', errors: { documents: error.message } }) : next()), async (req, res) => {
   try {
-    const { idProofType, idProofNumber } = req.body;
-    let uploadedDocs = [];
-    if (req.files && req.files.length > 0) {
-      uploadedDocs = await storeOwnerDocuments(req.files, req.user._id);
-    }
-
-    const docUpdate = {
-      idProofType: idProofType || '',
-      idProofNumber: idProofNumber || '',
-      currentStep: 4
-    };
-
-    if (mongoose.connection.readyState === 1 && mongoose.Types.ObjectId.isValid(req.user._id)) {
-      const user = await fastQuery(User.findById(req.user._id));
-      if (user) {
-        const existingDocs = user.ownerProfile?.documents || [];
-        user.ownerProfile = {
-          ...(user.ownerProfile?.toObject?.() || {}),
-          ...docUpdate,
-          documents: uploadedDocs.length > 0 ? [...existingDocs, ...uploadedDocs] : existingDocs,
-          status: 'in_progress'
-        };
-        await user.save();
-        return res.json({ ownerProfile: user.ownerProfile });
-      }
-    }
-
-    const existing = getOwnerApp(req.user.email);
-    const existingDocs = existing?.documents || [];
-    const app = upsertOwnerApp(req.user.email, {
-      ...docUpdate,
-      documents: uploadedDocs.length > 0 ? [...existingDocs, ...uploadedDocs] : existingDocs,
-      status: 'in_progress'
+    const errors = { ...ownerProfileErrors(req.user.ownerProfile), ...ownerDocumentErrors(req.body, [...(req.user.ownerProfile?.documents || []), ...(req.files || [])]) };
+    const fileError = ownerFileError(req.files || []); if (fileError) errors.documents = fileError;
+    if (Object.keys(errors).length) return invalid(res, errors);
+    const user = await mongoose.connection.transaction(async session => {
+      const current = await User.findOneAndUpdate(mutationFilter(req.user), { $set: { 'ownerProfile.idProofType': req.body.idProofType, 'ownerProfile.idProofNumber': req.body.idProofNumber.trim(), 'ownerProfile.status': req.user.ownerProfile?.status === 'rejected' ? 'rejected' : 'in_progress' }, $max: { 'ownerProfile.currentStep': 4 } }, { session, returnDocument: 'after', runValidators: true });
+      if (!current) throw Object.assign(new Error('Application changed. Refresh before editing.'), { status: 409 });
+      const documents = await storeOwnerDocuments(req.files || [], req.user._id, session);
+      current.ownerProfile.documents.push(...documents); await current.save({ session }); return current;
     });
-    res.json({ ownerProfile: app });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+    res.json({ ownerProfile: user.ownerProfile });
+  } catch (error) { res.status(error.status || 503).json({ message: error.status ? error.message : 'Unable to save verification details. Please retry.' }); }
 });
 
-// ---------- STEP 4: Owner reviews everything and submits for Admin review (-> STEP 5) ----------
-router.post('/submit', protect, async (req, res) => {
+router.post('/submit', protect, mutableApplication, async (req, res) => {
   try {
-    const submissionUpdate = { status: 'pending', currentStep: 5, submittedAt: new Date(), reviewNote: '' };
-
-    if (mongoose.connection.readyState === 1 && mongoose.Types.ObjectId.isValid(req.user._id)) {
-      const user = await fastQuery(User.findById(req.user._id));
-      if (user) {
-        user.ownerProfile = { ...(user.ownerProfile?.toObject?.() || {}), ...submissionUpdate };
-        await user.save();
-        return res.json({ ownerProfile: user.ownerProfile });
-      }
-    }
-
-    const app = upsertOwnerApp(req.user.email, submissionUpdate);
-    res.json({ ownerProfile: app });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+    const errors = { ...ownerProfileErrors(req.user.ownerProfile), ...ownerDocumentErrors(req.user.ownerProfile, req.user.ownerProfile?.documents || []) };
+    if (Object.keys(errors).length) return invalid(res, errors);
+    const user = await User.findOneAndUpdate({ ...mutationFilter(req.user), updatedAt: req.user.updatedAt }, { $set: { 'ownerProfile.status': 'pending', 'ownerProfile.currentStep': 5, 'ownerProfile.submittedAt': new Date(), 'ownerProfile.reviewNote': '' } }, { returnDocument: 'after', runValidators: true });
+    if (!user) return res.status(409).json({ message: 'Application changed. Refresh before submitting.' });
+    res.json({ ownerProfile: user.ownerProfile });
+  } catch { res.status(503).json({ message: 'Unable to submit your application. Please retry.' }); }
 });
 
 export default router;

@@ -16,7 +16,7 @@ const ownerProfileSchema = new mongoose.Schema({
   currentStep: { type: Number, default: 1 },
   status: {
     type: String,
-    enum: ['not_started', 'in_progress', 'pending', 'approved', 'rejected'],
+    enum: ['not_started', 'in_progress', 'pending', 'approved', 'rejected', 'revoked'],
     default: 'not_started'
   },
   submittedAt: { type: Date },
@@ -31,6 +31,9 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   role: { type: String, enum: ['user', 'admin', 'owner'], default: 'user' },
   ownerProfile: { type: ownerProfileSchema, default: () => ({}) },
+  savedListings: { type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Listing' }], default: undefined, select: false },
+  hostingRevision: { type: Number }, // Serializes publishing with owner revocation.
+  authVersion: { type: Number, min: 0 },
 }, { timestamps: true });
 
 // Mongoose 9 async middleware uses returned promises; do not use callback-style next().

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { stagingConfig } from './utils/stagingConfig.js';
 
 let cached = global.mongoose;
 
@@ -7,29 +8,19 @@ if (!cached) {
 }
 
 export default async function connectDB() {
-  if (cached.conn && mongoose.connection.readyState === 1) {
+  const { uri: MONGODB_URI, dbName } = stagingConfig();
+  if (cached.conn && mongoose.connection.readyState === 1 && mongoose.connection.name === dbName && cached.uri === MONGODB_URI) {
     return cached.conn;
   }
 
-  // Read MONGODB_URI here (inside the function), not at module load time. Reading it at
-  // import time was the root cause of "the uri parameter to openUri() must be a string,
-  // got undefined": db.js used to be imported (and its top-level code evaluated) before
-  // server.js's dotenv.config() call had run, so it permanently cached whatever
-  // process.env.MONGODB_URI was at that premature moment. Reading it fresh inside this
-  // function also means a real MONGODB_URI set directly on the hosting platform (e.g. a
-  // Vercel project environment variable, which never goes through a .env file) is picked
-  // up correctly.
-  const MONGODB_URI = process.env.MONGODB_URI;
-
-  if (!MONGODB_URI) {
-    throw new Error(
-      'MONGODB_URI is not set. Add it to your .env file (see .env.example) or to your ' +
-      'hosting platform\'s environment variables, then restart the server.'
-    );
+  if (cached.uri && cached.uri !== MONGODB_URI && cached.promise) {
+    throw new Error('Staging configuration changed; restart the backend before reconnecting.');
   }
 
   if (!cached.promise) {
+    cached.uri = MONGODB_URI;
     cached.promise = mongoose.connect(MONGODB_URI, {
+  dbName,
   serverSelectionTimeoutMS: 20000,
   connectTimeoutMS: 20000,
   family: 4,
@@ -39,12 +30,13 @@ export default async function connectDB() {
       return mongooseInstance;
     }).catch(err => {
       cached.promise = null;
-      throw err;
+      throw new Error('Staging database connection failed. Check private configuration and Atlas network access.');
     });
   }
 
   try {
     cached.conn = await cached.promise;
+    if (mongoose.connection.name !== dbName) throw new Error('Database identity mismatch; refusing database operations.');
     return cached.conn;
   } catch (err) {
     cached.promise = null;

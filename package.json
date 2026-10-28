@@ -4,11 +4,13 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "preview:catalog": "node server/scripts/preview-quick-catalog.js",
     "dev:frontend": "vite",
-    "dev:backend": "npm run start --prefix server",
+    "dev:backend": "node --watch server/scripts/dev-staging.js",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "preview:admin": "node server/scripts/preview-admin.js"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
@@ -17,11 +19,14 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
+    "leaflet": "^1.9.4",
     "mongoose": "^9.9.4",
     "multer": "^2.3.0",
+    "nodemailer": "^10.1.7",
     "react": "latest",
     "react-dom": "latest",
-    "react-router-dom": "latest"
+    "react-router-dom": "latest",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "concurrently": "^10.0.5",

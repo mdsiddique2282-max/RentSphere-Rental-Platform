@@ -1,0 +1,228 @@
+{
+  "capturedAt": "2026-10-20T09:29:05.503Z",
+  "source": "Read-only original Listing/User.find snapshot; no database writes; password hashes and credentials excluded.",
+  "listings": [
+    {
+      "_id": "6ad4ac1d98166bf0d4230f0f",
+      "title": "1 BHK Apartment in Mulund",
+      "name": "1 BHK Apartment in Mulund",
+      "type": "property",
+      "category": "Apartment",
+      "location": "Mulund, Mumbai",
+      "price": 24000,
+      "description": "A well-maintained furnished home with excellent natural light.",
+      "image": "https://images.nobroker.in/images/8a9f934490b4cd9d0190b50627be14f9/8a9f934490b4cd9d0190b50627be14f9_96834_892988_medium.jpg",
+      "gallery": [
+        "https://images.nobroker.in/images/8a9f934490b4cd9d0190b50627be14f9/8a9f934490b4cd9d0190b50627be14f9_96834_892988_medium.jpg"
+      ],
+      "amenities": [
+        "Parking",
+        "Lift",
+        "Security"
+      ],
+      "features": [],
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "status": "available",
+      "bookingRevision": 0,
+      "rating": 0,
+      "__v": 0,
+      "createdAt": "2026-10-18T11:23:09.447Z",
+      "updatedAt": "2026-10-18T11:23:09.447Z"
+    },
+    {
+      "_id": "6ad4ac1d98166bf0d4230f10",
+      "title": "2 BHK Flat in Andheri West",
+      "name": "2 BHK Flat in Andheri West",
+      "type": "property",
+      "category": "Apartment",
+      "location": "Andheri West, Mumbai",
+      "price": 38000,
+      "description": "Spacious two-bedroom residence near Andheri Metro.",
+      "image": "https://is1-3.housingcdn.com/01c16c28/2d9380714fb183d24422949663c1231b/v0/medium/2_bhk_apartment-for-rent-andheri_west-Mumbai-hall.jpg",
+      "gallery": [
+        "https://is1-3.housingcdn.com/01c16c28/2d9380714fb183d24422949663c1231b/v0/medium/2_bhk_apartment-for-rent-andheri_west-Mumbai-hall.jpg"
+      ],
+      "amenities": [
+        "Balcony",
+        "WiFi"
+      ],
+      "features": [],
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "status": "available",
+      "bookingRevision": 0,
+      "rating": 0,
+      "__v": 0,
+      "createdAt": "2026-10-18T11:23:09.447Z",
+      "updatedAt": "2026-10-18T11:23:09.447Z"
+    },
+    {
+      "_id": "6ad4ac1d98166bf0d4230f11",
+      "title": "Honda City VX",
+      "name": "Honda City VX",
+      "type": "vehicle",
+      "category": "Sedan",
+      "location": "Chennai, Tamil Nadu",
+      "price": 2499,
+      "description": "Smooth ride for the city.",
+      "image": "https://images.overdrive.in/wp-content/uploads/2017/09/Hyundai-Verna-vs-Honda-City-Comparo_-97.jpg",
+      "gallery": [
+        "https://images.overdrive.in/wp-content/uploads/2017/09/Hyundai-Verna-vs-Honda-City-Comparo_-97.jpg"
+      ],
+      "amenities": [],
+      "features": [
+        "AC",
+        "Bluetooth"
+      ],
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "status": "available",
+      "bookingRevision": 0,
+      "rating": 0,
+      "__v": 0,
+      "createdAt": "2026-10-18T11:23:09.447Z",
+      "updatedAt": "2026-10-18T11:23:09.447Z"
+    },
+    {
+      "_id": "6ad4ac1d98166bf0d4230f12",
+      "title": "Hyundai Creta",
+      "name": "Hyundai Creta",
+      "type": "vehicle",
+      "category": "SUV",
+      "location": "Mumbai, Maharashtra",
+      "price": 2799,
+      "description": "Popular automatic SUV.",
+      "image": "https://imgd.aeplcdn.com/640X480/vimages/202603/4428980_133865_4_1772958412062.jpg?qp=80&fit=true",
+      "gallery": [
+        "https://imgd.aeplcdn.com/640X480/vimages/202603/4428980_133865_4_1772958412062.jpg?qp=80&fit=true"
+      ],
+      "amenities": [],
+      "features": [
+        "Automatic",
+        "GPS"
+      ],
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "status": "available",
+      "bookingRevision": 0,
+      "rating": 0,
+      "__v": 0,
+      "createdAt": "2026-10-18T11:23:09.447Z",
+      "updatedAt": "2026-10-18T11:23:09.447Z"
+    },
+    {
+      "_id": "6ad4ac1d98166bf0d4230f13",
+      "title": "1 BHK Apartment in Mulund",
+      "name": "1 BHK Apartment in Mulund",
+      "type": "property",
+      "category": "Apartment",
+      "location": "Mulund, Mumbai",
+      "price": 24000,
+      "description": "A well-maintained furnished home with excellent natural light.",
+      "image": "https://images.nobroker.in/images/8a9f934490b4cd9d0190b50627be14f9/8a9f934490b4cd9d0190b50627be14f9_96834_892988_medium.jpg",
+      "gallery": [
+        "https://images.nobroker.in/images/8a9f934490b4cd9d0190b50627be14f9/8a9f934490b4cd9d0190b50627be14f9_96834_892988_medium.jpg"
+      ],
+      "amenities": [
+        "Parking",
+        "Lift",
+        "Security"
+      ],
+      "features": [],
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "status": "available",
+      "bookingRevision": 0,
+      "rating": 0,
+      "__v": 0,
+      "createdAt": "2026-10-18T11:23:09.453Z",
+      "updatedAt": "2026-10-18T11:23:09.453Z"
+    },
+    {
+      "_id": "6ad4ac1d98166bf0d4230f14",
+      "title": "2 BHK Flat in Andheri West",
+      "name": "2 BHK Flat in Andheri West",
+      "type": "property",
+      "category": "Apartment",
+      "location": "Andheri West, Mumbai",
+      "price": 38000,
+      "description": "Spacious two-bedroom residence near Andheri Metro.",
+      "image": "https://is1-3.housingcdn.com/01c16c28/2d9380714fb183d24422949663c1231b/v0/medium/2_bhk_apartment-for-rent-andheri_west-Mumbai-hall.jpg",
+      "gallery": [
+        "https://is1-3.housingcdn.com/01c16c28/2d9380714fb183d24422949663c1231b/v0/medium/2_bhk_apartment-for-rent-andheri_west-Mumbai-hall.jpg"
+      ],
+      "amenities": [
+        "Balcony",
+        "WiFi"
+      ],
+      "features": [],
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "status": "rented",
+      "bookingRevision": 0,
+      "rating": 0,
+      "__v": 0,
+      "createdAt": "2026-10-18T11:23:09.453Z",
+      "updatedAt": "2026-10-18T11:25:12.325Z",
+      "availability": "Currently Rented"
+    },
+    {
+      "_id": "6ad4ac1d98166bf0d4230f15",
+      "title": "Honda City VX",
+      "name": "Honda City VX",
+      "type": "vehicle",
+      "category": "Sedan",
+      "location": "Chennai, Tamil Nadu",
+      "price": 2499,
+      "description": "Smooth ride for the city.",
+      "image": "https://images.overdrive.in/wp-content/uploads/2017/09/Hyundai-Verna-vs-Honda-City-Comparo_-97.jpg",
+      "gallery": [
+        "https://images.overdrive.in/wp-content/uploads/2017/09/Hyundai-Verna-vs-Honda-City-Comparo_-97.jpg"
+      ],
+      "amenities": [],
+      "features": [
+        "AC",
+        "Bluetooth"
+      ],
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "status": "available",
+      "bookingRevision": 0,
+      "rating": 0,
+      "__v": 0,
+      "createdAt": "2026-10-18T11:23:09.453Z",
+      "updatedAt": "2026-10-18T11:23:09.453Z"
+    },
+    {
+      "_id": "6ad4ac1d98166bf0d4230f16",
+      "title": "Hyundai Creta",
+      "name": "Hyundai Creta",
+      "type": "vehicle",
+      "category": "SUV",
+      "location": "Mumbai, Maharashtra",
+      "price": 2799,
+      "description": "Popular automatic SUV.",
+      "image": "https://imgd.aeplcdn.com/640X480/vimages/202603/4428980_133865_4_1772958412062.jpg?qp=80&fit=true",
+      "gallery": [
+        "https://imgd.aeplcdn.com/640X480/vimages/202603/4428980_133865_4_1772958412062.jpg?qp=80&fit=true"
+      ],
+      "amenities": [],
+      "features": [
+        "Automatic",
+        "GPS"
+      ],
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "status": "available",
+      "bookingRevision": 0,
+      "rating": 0,
+      "__v": 0,
+      "createdAt": "2026-10-18T11:23:09.453Z",
+      "updatedAt": "2026-10-18T11:23:09.453Z"
+    }
+  ],
+  "owners": [
+    {
+      "_id": "6ad4aa8b98166bf0d4230f0c",
+      "name": "Admin",
+      "email": "admin@rentsphere.com",
+      "role": "admin",
+      "ownerProfile": {
+        "status": "not_started"
+      }
+    }
+  ]
+}

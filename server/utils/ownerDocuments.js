@@ -1,17 +1,22 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import User from '../models/User.js';
-import Listing from '../models/Listing.js';
 import OwnerDocument from '../models/OwnerDocument.js';
+import { existingUpload } from './uploadPaths.js';
+import { readFile } from 'node:fs/promises';
+import { validateListingImage, listingImageUsers } from './uploadImages.js';
 
 const uploadsDir = fileURLToPath(new URL('../uploads/', import.meta.url));
 const safeName = /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/;
 const safeType = type => /^(application\/pdf|image\/(png|jpeg|gif|webp|bmp|avif))$/.test(type) ? type : 'application/octet-stream';
+const uploadLocation = (req, filename) => req.app.locals.listingUploadDirectory
+  ? { root: req.app.locals.listingUploadDirectory, path: path.join(req.app.locals.listingUploadDirectory, filename) }
+  : existingUpload(filename);
 
-export async function storeOwnerDocuments(files, ownerId) {
+export async function storeOwnerDocuments(files, ownerId, session) {
   const documents = [];
   for (const file of files || []) {
-    const document = await OwnerDocument.create({ owner: ownerId, contentType: file.mimetype, data: file.buffer });
+    const [document] = await OwnerDocument.create([{ owner: ownerId, contentType: file.mimetype, data: file.buffer }], { session });
     documents.push(`owner-document:${document._id}`);
   }
   return documents;
@@ -21,7 +26,7 @@ export async function storeOwnerDocuments(files, ownerId) {
 // Only files explicitly referenced by a listing are public. Fail closed if the
 // database cannot establish that a file is public. No existing records are moved.
 export async function servePublicListingUpload(req, res) {
-  res.set('Cache-Control', 'no-store');
+  res.set({ 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "sandbox; default-src 'none'" });
   let filename;
   try { filename = decodeURIComponent(req.path).slice(1); } catch { return res.sendStatus(404); }
   if (!safeName.test(filename)) return res.sendStatus(404);
@@ -30,21 +35,23 @@ export async function servePublicListingUpload(req, res) {
   try {
     const privateFile = await User.exists({ 'ownerProfile.documents': { $regex: `^${escaped}$`, $options: 'i' } }).maxTimeMS(5000);
     if (privateFile) return res.sendStatus(404);
-    const publicFile = await Listing.exists({ $or: [{ image: url }, { gallery: url }] }).maxTimeMS(5000);
-    if (!publicFile) return res.sendStatus(404);
-    return res.sendFile(filename, { root: uploadsDir, dotfiles: 'deny' }, error => {
-      if (error && !res.headersSent) res.sendStatus(error.statusCode === 404 ? 404 : 500);
-    });
+    if (!(await listingImageUsers(url)).length) return res.sendStatus(404);
+    const location = uploadLocation(req, filename);
+    if (!location) return res.sendStatus(404);
+    let bytes, image;
+    try { bytes = await readFile(location.path); image = await validateListingImage(bytes); }
+    catch { return res.sendStatus(404); }
+    return res.type(image.contentType).send(bytes);
   } catch {
     return res.status(503).json({ message: 'Uploads are temporarily unavailable.' });
   }
 }
 
 export async function serveOwnerDocument(req, res) {
-  res.set({ 'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff' });
+  res.set({ 'Cache-Control': 'private, no-store', 'X-Content-Type-Options': 'nosniff', 'Content-Disposition': 'inline', 'Content-Security-Policy': "sandbox; default-src 'none'" });
   const { ownerId, index } = req.params;
   if (!/^[a-fA-F0-9]{24}$/.test(ownerId) || !/^(0|[1-9]\d*)$/.test(index)) return res.sendStatus(404);
-  if (req.user.role !== 'admin' && String(req.user._id) !== ownerId) return res.sendStatus(403);
+  if (req.user.role !== 'admin') return res.sendStatus(403);
   try {
     const owner = await User.findById(ownerId).select('ownerProfile.documents');
     const reference = owner?.ownerProfile?.documents?.[Number(index)];
@@ -62,7 +69,9 @@ export async function serveOwnerDocument(req, res) {
     if (!safeName.test(filename)) return res.sendStatus(404);
     const types = { '.pdf': 'application/pdf', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.gif': 'image/gif', '.webp': 'image/webp', '.bmp': 'image/bmp', '.avif': 'image/avif' };
     res.type(types[path.extname(filename).toLowerCase()] || 'application/octet-stream');
-    return res.sendFile(filename, { root: uploadsDir, dotfiles: 'deny' }, error => {
+    const location = uploadLocation(req, filename);
+    if (!location) return res.sendStatus(404);
+    return res.sendFile(filename, { root: location.root, dotfiles: 'deny' }, error => {
       if (error && !res.headersSent) res.sendStatus(error.statusCode === 404 ? 404 : 500);
     });
   } catch {

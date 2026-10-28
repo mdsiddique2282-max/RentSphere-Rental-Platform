@@ -1,0 +1,2604 @@
+{
+  "schemaVersion": 1,
+  "batch": "mumbai-2026-v1",
+  "scope": "Mumbai city and suburbs; excludes Thane and Navi Mumbai",
+  "selection": {
+    "profile": "mumbai-15x15-v1",
+    "keys": [
+      "P01",
+      "P03",
+      "P07",
+      "P11",
+      "P14",
+      "P18",
+      "P19",
+      "P21",
+      "P25",
+      "P28",
+      "P29",
+      "P31",
+      "P32",
+      "P34",
+      "P36",
+      "M01",
+      "M03",
+      "M06",
+      "M10",
+      "M15",
+      "M17",
+      "M20",
+      "M22",
+      "M23",
+      "M25",
+      "M26",
+      "M31",
+      "M33",
+      "M36",
+      "M38"
+    ],
+    "sourceManifestSha256": "8e3588928d0d4f5f8909276b87af5f8e0b0c9e99b96b3cf836819fcff9be2a9e"
+  },
+  "expected": {
+    "properties": 15,
+    "vehicles": 15
+  },
+  "records": [
+    {
+      "key": "P01",
+      "listing": {
+        "_id": "0175728eb2fa6e2a935e7862",
+        "catalogKey": "mumbai-2026-P01",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Dahisar East, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Dahisar East",
+        "price": 24000,
+        "ratePeriod": "month",
+        "description": "Sample studio illustrating a unfurnished layout in Dahisar East, with 280 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample studio in Dahisar East",
+        "bhk": 0,
+        "area": 280,
+        "areaBasis": "carpet",
+        "bathrooms": 1,
+        "floor": "3",
+        "furnishing": "Unfurnished",
+        "category": "Studio",
+        "amenities": [
+          "Lift",
+          "building entry security",
+          "intercom"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living angle; distinct sleeping-zone angle of the same studio; kitchen; bathroom; optional exterior or window outlook from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P01-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "87df4617358e216db76a060bcba4ee49ae4bf547129d7b70df3290febfa86d52"
+        },
+        {
+          "url": "/catalog-placeholders/P01-2.svg",
+          "kind": "placeholder",
+          "label": "Sleeping area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "2cdacc90f3c818eae3ab1226904cd6b1614d8291e595df2ed2252ec486ccab1f"
+        },
+        {
+          "url": "/catalog-placeholders/P01-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "821685ad4b1e88f7af186b7c95ab7970e13bab5d831d9ffeee637bf55d1baab1"
+        }
+      ]
+    },
+    {
+      "key": "P03",
+      "listing": {
+        "_id": "79cbd973b9b172ea2fbdf034",
+        "catalogKey": "mumbai-2026-P03",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Kandivali East, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Kandivali East",
+        "price": 33000,
+        "ratePeriod": "month",
+        "description": "Sample 1 BHK apartment illustrating a semi-furnished layout in Kandivali East, with 430 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 1 BHK apartment in Kandivali East",
+        "bhk": 1,
+        "area": 430,
+        "areaBasis": "carpet",
+        "bathrooms": 1,
+        "floor": "6",
+        "furnishing": "Semi-furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "building entry security",
+          "intercom"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P03-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "ce4cf8d095db48beff846df73acb551e2aef1fb486071ee10a121665a4599c60"
+        },
+        {
+          "url": "/catalog-placeholders/P03-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "ee76d1cf853baea506a3408d78509f720dd6f5ef50a0b8a3c31f93131afd8ef9"
+        },
+        {
+          "url": "/catalog-placeholders/P03-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "7621b1cfe9e6fc027e5b94cf8351d477da8b7c939a35017d13985c1740e224bb"
+        }
+      ]
+    },
+    {
+      "key": "P07",
+      "listing": {
+        "_id": "a7724134eb8cf6320f65473a",
+        "catalogKey": "mumbai-2026-P07",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Andheri East, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Andheri East",
+        "price": 60000,
+        "ratePeriod": "month",
+        "description": "Sample 1 BHK apartment illustrating a furnished layout in Andheri East, with 460 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 1 BHK apartment in Andheri East",
+        "bhk": 1,
+        "area": 460,
+        "areaBasis": "carpet",
+        "bathrooms": 1,
+        "floor": "8",
+        "furnishing": "Furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "entry security",
+          "intercom",
+          "one planned parking space",
+          "balcony"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P07-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "de1eb8be158ca5603e27a425ecf228abc818a40ce1d7dec2bae46f021a9d81ef"
+        },
+        {
+          "url": "/catalog-placeholders/P07-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "df092b7f612417736097c309bfecd4a780b41ce798937166abb5b6334989c441"
+        },
+        {
+          "url": "/catalog-placeholders/P07-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "0e31c8d95e57faab43ec6e823f0684a840344094166bddb90f8c7e3a2a650c35"
+        }
+      ]
+    },
+    {
+      "key": "P11",
+      "listing": {
+        "_id": "1f48ad6ae8cbf479a49bc57f",
+        "catalogKey": "mumbai-2026-P11",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Bhandup West, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Bhandup West",
+        "price": 35000,
+        "ratePeriod": "month",
+        "description": "Sample 1 BHK apartment illustrating a semi-furnished layout in Bhandup West, with 440 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 1 BHK apartment in Bhandup West",
+        "bhk": 1,
+        "area": 440,
+        "areaBasis": "carpet",
+        "bathrooms": 1,
+        "floor": "7",
+        "furnishing": "Semi-furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "building entry security",
+          "intercom"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P11-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "357238f5fca5422f07e3cc03b48d4840a4c65a9be04b34f15cc41a7db70bc1c6"
+        },
+        {
+          "url": "/catalog-placeholders/P11-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "432f2cb3ad753730e130563863c0218ad88a7409d20937aa03eb4ac667012b03"
+        },
+        {
+          "url": "/catalog-placeholders/P11-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "37508a5b8b338be6e0dca43bcafe2f79ae9fc00675083da9c8cd89bf7ca5f78d"
+        }
+      ]
+    },
+    {
+      "key": "P14",
+      "listing": {
+        "_id": "5d6bca81781bef4679a01e73",
+        "catalogKey": "mumbai-2026-P14",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Vikhroli East, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Vikhroli East",
+        "price": 40000,
+        "ratePeriod": "month",
+        "description": "Sample 1 BHK apartment illustrating a semi-furnished layout in Vikhroli East, with 460 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 1 BHK apartment in Vikhroli East",
+        "bhk": 1,
+        "area": 460,
+        "areaBasis": "carpet",
+        "bathrooms": 1,
+        "floor": "8",
+        "furnishing": "Semi-furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "building entry security",
+          "intercom"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P14-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "a19cf408b3ac7d9d1fbfed3edfe949faeb9a5464f39cc6d85c90834c9deb2077"
+        },
+        {
+          "url": "/catalog-placeholders/P14-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "cf3974fcfe8e20654892b8753579cd2871849d8451235ebfe6bc6a34fe299ef7"
+        },
+        {
+          "url": "/catalog-placeholders/P14-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "a619378b015ac1ef3703edd7366fb8ef23b930dfa3c516d5b7381179ac8ea2fc"
+        }
+      ]
+    },
+    {
+      "key": "P18",
+      "listing": {
+        "_id": "94d59c683a24868736d4d72a",
+        "catalogKey": "mumbai-2026-P18",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Chembur, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Chembur",
+        "price": 52000,
+        "ratePeriod": "month",
+        "description": "Sample 1 BHK apartment illustrating a furnished layout in Chembur, with 500 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 1 BHK apartment in Chembur",
+        "bhk": 1,
+        "area": 500,
+        "areaBasis": "carpet",
+        "bathrooms": 1,
+        "floor": "6",
+        "furnishing": "Furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "building entry security",
+          "intercom"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P18-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "cdfb764fd912f22f24a18970fac092b9580d7234107fbfee987c67be88a7cdc0"
+        },
+        {
+          "url": "/catalog-placeholders/P18-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "0504cae83452d7505ac04d1108dba9ca80a057006f45ed8e8e541c295792b089"
+        },
+        {
+          "url": "/catalog-placeholders/P18-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "2fbdb5722c72162f27a55c9bb351b18f19fbd5849897dda67068c5bb0ec416f3"
+        }
+      ]
+    },
+    {
+      "key": "P19",
+      "listing": {
+        "_id": "f2c85e0a2f1bb21f2ec8eee0",
+        "catalogKey": "mumbai-2026-P19",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Borivali East, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Borivali East",
+        "price": 62000,
+        "ratePeriod": "month",
+        "description": "Sample 2 BHK apartment illustrating a semi-furnished layout in Borivali East, with 680 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 2 BHK apartment in Borivali East",
+        "bhk": 2,
+        "area": 680,
+        "areaBasis": "carpet",
+        "bathrooms": 2,
+        "floor": "10",
+        "furnishing": "Semi-furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "entry security",
+          "intercom",
+          "one planned parking space",
+          "balcony"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P19-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "ad8b5faa18e4f85ba885c8dc0eff91de5c8de201407e97f6831aa66bdea09e54"
+        },
+        {
+          "url": "/catalog-placeholders/P19-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "f09f1ad97ed61509517f4b023671c2ea83b363946e9740ca2c43be3bfea8256f"
+        },
+        {
+          "url": "/catalog-placeholders/P19-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "3882ca5117c826bbcf0bf554998cbe52328b5244082f432392ee3b9d33acf48d"
+        }
+      ]
+    },
+    {
+      "key": "P21",
+      "listing": {
+        "_id": "b421c353660d3810152a5636",
+        "catalogKey": "mumbai-2026-P21",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Malad West, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Malad West",
+        "price": 65000,
+        "ratePeriod": "month",
+        "description": "Sample 2 BHK apartment illustrating a semi-furnished layout in Malad West, with 700 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 2 BHK apartment in Malad West",
+        "bhk": 2,
+        "area": 700,
+        "areaBasis": "carpet",
+        "bathrooms": 2,
+        "floor": "8",
+        "furnishing": "Semi-furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "entry security",
+          "intercom",
+          "one planned parking space",
+          "balcony"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P21-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "dd10d0e99080b2cf56c7524da2bb64a81829ba1d2f5ef2b3eb08196b7493550f"
+        },
+        {
+          "url": "/catalog-placeholders/P21-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "a27c25433e9cff7a50eb268735915bc210c705d0fa12370b3add2e03e3a62f47"
+        },
+        {
+          "url": "/catalog-placeholders/P21-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "39f432da083a2935bba900852e0224f0bf53f0d414b7c25d5394a69d041a0a1e"
+        }
+      ]
+    },
+    {
+      "key": "P25",
+      "listing": {
+        "_id": "0f48a9571bd5b79faeb3d4e1",
+        "catalogKey": "mumbai-2026-P25",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Powai, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Powai",
+        "price": 95000,
+        "ratePeriod": "month",
+        "description": "Sample 2 BHK apartment illustrating a furnished layout in Powai, with 760 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 2 BHK apartment in Powai",
+        "bhk": 2,
+        "area": 760,
+        "areaBasis": "carpet",
+        "bathrooms": 2,
+        "floor": "11",
+        "furnishing": "Furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "entry security",
+          "intercom",
+          "one planned parking space",
+          "balcony"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P25-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "68b020ceea131f2783b8901988fdb4b5c067fbe0e3c8d242f3936fded434eeba"
+        },
+        {
+          "url": "/catalog-placeholders/P25-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "549f521e7798863ef808ae6dff4cedc166a29542085b662b8136608856f31f88"
+        },
+        {
+          "url": "/catalog-placeholders/P25-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "71ce8f04b4bdcb530868a8521648d1a87b85c1ec990a3bf858e0859458da3175"
+        }
+      ]
+    },
+    {
+      "key": "P28",
+      "listing": {
+        "_id": "059ea379fa49600d1b7baf98",
+        "catalogKey": "mumbai-2026-P28",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Wadala, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Wadala",
+        "price": 90000,
+        "ratePeriod": "month",
+        "description": "Sample 2 BHK apartment illustrating a furnished layout in Wadala, with 780 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 2 BHK apartment in Wadala",
+        "bhk": 2,
+        "area": 780,
+        "areaBasis": "carpet",
+        "bathrooms": 2,
+        "floor": "12",
+        "furnishing": "Furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "entry security",
+          "intercom",
+          "one planned parking space",
+          "balcony"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P28-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "1bb2efa8461be298cfd6cd9ea81cb109166bb33736f5a2dd25e1b5c44243df19"
+        },
+        {
+          "url": "/catalog-placeholders/P28-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "42ddff8f8c6273f33d22fd018e227f263c4aa633ca8b9d97f5d7f7674b1d7d08"
+        },
+        {
+          "url": "/catalog-placeholders/P28-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "90a7665dbaa3a057ce630022d0414686325081b205bddc8a587d41e3e286281c"
+        }
+      ]
+    },
+    {
+      "key": "P29",
+      "listing": {
+        "_id": "e07accf38642cc52b479bb9d",
+        "catalogKey": "mumbai-2026-P29",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Dadar West, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Dadar West",
+        "price": 110000,
+        "ratePeriod": "month",
+        "description": "Sample 2 BHK apartment illustrating a semi-furnished layout in Dadar West, with 800 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 2 BHK apartment in Dadar West",
+        "bhk": 2,
+        "area": 800,
+        "areaBasis": "carpet",
+        "bathrooms": 2,
+        "floor": "6",
+        "furnishing": "Semi-furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "entry security",
+          "intercom",
+          "one planned parking space",
+          "balcony"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P29-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "6b3ce6c51113beaaa89e4584753e70dddf615b7bcf537fcd3fde42614f482ff4"
+        },
+        {
+          "url": "/catalog-placeholders/P29-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "e02be5942125e06b39a86411aeeb628773447cdcd9d127ce1ffa619e4315ef1b"
+        },
+        {
+          "url": "/catalog-placeholders/P29-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "ea3640c1af9b5559cd86edd7bdc1b5a16e1ad0462dbf86ed9d09416efaea13a3"
+        }
+      ]
+    },
+    {
+      "key": "P31",
+      "listing": {
+        "_id": "04c7ba9a1c0429e538005ea3",
+        "catalogKey": "mumbai-2026-P31",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Bandra West, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Bandra West",
+        "price": 160000,
+        "ratePeriod": "month",
+        "description": "Sample 2 BHK apartment illustrating a furnished layout in Bandra West, with 850 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 2 BHK apartment in Bandra West",
+        "bhk": 2,
+        "area": 850,
+        "areaBasis": "carpet",
+        "bathrooms": 2,
+        "floor": "7",
+        "furnishing": "Furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "entry security",
+          "intercom",
+          "one planned parking space",
+          "balcony",
+          "gym access"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P31-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "d18b88af70dcbb7c42720b7c0a09187a6698e94a96b9f68165573004912f4929"
+        },
+        {
+          "url": "/catalog-placeholders/P31-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "0194890afd5a554fd8c6b229210f84440d0e1a812ddcf31968eff1fa61d7d5e0"
+        },
+        {
+          "url": "/catalog-placeholders/P31-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "1b27455403825819df403b7abac5fc817d603e5f685e2c2ad841b633a92eaaff"
+        }
+      ]
+    },
+    {
+      "key": "P32",
+      "listing": {
+        "_id": "c798b0e7cf82fb697ceefb9f",
+        "catalogKey": "mumbai-2026-P32",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Juhu, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Juhu",
+        "price": 230000,
+        "ratePeriod": "month",
+        "description": "Sample 3 BHK apartment illustrating a furnished layout in Juhu, with 1200 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 3 BHK apartment in Juhu",
+        "bhk": 3,
+        "area": 1200,
+        "areaBasis": "carpet",
+        "bathrooms": 3,
+        "floor": "6",
+        "furnishing": "Furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "entry security",
+          "intercom",
+          "one planned parking space",
+          "balcony",
+          "gym access"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P32-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "9bb9e8013f9f74751dd952978a3f52c99c178f817df2ec6f819adb2ab3c0440d"
+        },
+        {
+          "url": "/catalog-placeholders/P32-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "93ac0c2f43afd92cd91c2bc3c6d3a6936dc82fdf65f58a841339a92a518a74da"
+        },
+        {
+          "url": "/catalog-placeholders/P32-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "e190a79e0a497ea01ab21f2391c9150f6b7d696d55f0a37799abc9fd8367fa63"
+        }
+      ]
+    },
+    {
+      "key": "P34",
+      "listing": {
+        "_id": "fd18549fcce6df79cc1081e3",
+        "catalogKey": "mumbai-2026-P34",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Worli, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Worli",
+        "price": 300000,
+        "ratePeriod": "month",
+        "description": "Sample 3 BHK apartment illustrating a furnished layout in Worli, with 1250 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 3 BHK apartment in Worli",
+        "bhk": 3,
+        "area": 1250,
+        "areaBasis": "carpet",
+        "bathrooms": 3,
+        "floor": "18",
+        "furnishing": "Furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "entry security",
+          "intercom",
+          "one planned parking space",
+          "balcony",
+          "gym access"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P34-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "a1a3d1760c2fabed527e313991cf56c6806d604d92d63f260bd118d01f01e66a"
+        },
+        {
+          "url": "/catalog-placeholders/P34-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "3fb413839ea7e1b20c04fdf2018fc4f51f2607668bca7ff13c5e04cf8be13ff5"
+        },
+        {
+          "url": "/catalog-placeholders/P34-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "30c9737d1321661c877163436589d78c845942c5ba7bf23a0db7a78be426efaf"
+        }
+      ]
+    },
+    {
+      "key": "P36",
+      "listing": {
+        "_id": "5c5687f41e10a89c0ef81018",
+        "catalogKey": "mumbai-2026-P36",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "property",
+        "location": "Colaba, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Colaba",
+        "price": 150000,
+        "ratePeriod": "month",
+        "description": "Sample 2 BHK apartment illustrating a furnished layout in Colaba, with 900 sq.ft of proposed carpet area. This example is for exploring the catalog and visit-request workflow; it is not a verified rental offer. Final photographs and listed amenities must describe the same reference property.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "availability": "Sample inventory",
+        "title": "Sample 2 BHK apartment in Colaba",
+        "bhk": 2,
+        "area": 900,
+        "areaBasis": "carpet",
+        "bathrooms": 2,
+        "floor": "5",
+        "furnishing": "Furnished",
+        "category": "Apartment",
+        "amenities": [
+          "Lift",
+          "entry security",
+          "intercom",
+          "one planned parking space",
+          "balcony",
+          "gym access"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Living room; main bedroom; kitchen; bathroom; optional different bedroom or balcony from that property. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/P36-1.svg",
+          "kind": "placeholder",
+          "label": "Living area photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "d261375608bab8c1a2ab940c540b578193671a29ddd1b1ffac5d36601c7e74f2"
+        },
+        {
+          "url": "/catalog-placeholders/P36-2.svg",
+          "kind": "placeholder",
+          "label": "Bedroom photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "257ebaca8e1967c65189db8307fd62b82e5973be04939c4fac1cf1b572bd17ee"
+        },
+        {
+          "url": "/catalog-placeholders/P36-3.svg",
+          "kind": "placeholder",
+          "label": "Kitchen photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "941100082bc1c1ef4e361da7dedba85ceeb172ee6f9b8939f96127f256201e93"
+        }
+      ]
+    },
+    {
+      "key": "M01",
+      "listing": {
+        "_id": "2f3967910514edcfd15a32ed",
+        "catalogKey": "mumbai-2026-M01",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Andheri East, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Andheri East",
+        "price": 2200,
+        "ratePeriod": "day",
+        "description": "Sample Maruti Suzuki Swift profile for Andheri East, illustrating a petrol, manual hatchback with 5 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Maruti Suzuki Swift",
+        "fuel": "Petrol",
+        "transmission": "Manual",
+        "seats": 5,
+        "kind": "Car",
+        "category": "Hatchback",
+        "features": [
+          "Air conditioning",
+          "power windows",
+          "USB charging"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "approved"
+      },
+      "media": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Maruti_Suzuki_Swift_2092.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Maruti_Suzuki_Swift_2092.JPG",
+          "author": "Premnath Kudva",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+          "attribution": "Maruti Suzuki Swift 2092.JPG — Premnath Kudva, CC BY-SA 3.0. Original photograph; no alterations. Reference Photos — Demo/Sample Listing. Not verified Mumbai rental inventory.",
+          "licenseEvidence": "reference-photo-selection.json: File:Maruti Suzuki Swift 2092.JPG; own-work copyright license from source page.",
+          "rightsReviewedBy": "Codex — source license/attribution review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — decoded image visual make/model and angle review",
+          "identityEvidence": "Maruti Suzuki Swift hatchback; silver car, matching driveway and body details. Exact physical rental vehicle, engine and transmission are not verified.",
+          "depictedCatalogKey": "mumbai-2026-M01",
+          "setId": "Premnath-Kudva-Maruti-Suzuki-Swift",
+          "angle": "right side",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual framing, clarity and binary decode review",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T07:55:44.518Z",
+          "decoded": true,
+          "width": 2896,
+          "height": 1944,
+          "format": "jpeg",
+          "byteLength": 2483764,
+          "sha256": "8824333f01653238def61c80ef4f836bd65a3c55b9247b4ff01595ed66095e72",
+          "dHash": "d55c6c7b8796c429",
+          "finalUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Maruti_Suzuki_Swift_2092.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "localFile": "../public/catalog-media/M01/reference-1.jpg",
+          "sourceLocation": "Maruti Suzuki Swift hatchback; silver car, matching driveway and body details."
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Maruti_Suzuki_Swift_2093.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Maruti_Suzuki_Swift_2093.JPG",
+          "author": "Premnath Kudva",
+          "license": "CC BY-SA 3.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+          "attribution": "Maruti Suzuki Swift 2093.JPG — Premnath Kudva, CC BY-SA 3.0. Original photograph; no alterations. Reference Photos — Demo/Sample Listing. Not verified Mumbai rental inventory.",
+          "licenseEvidence": "reference-photo-selection.json: File:Maruti Suzuki Swift 2093.JPG; own-work copyright license from source page.",
+          "rightsReviewedBy": "Codex — source license/attribution review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — decoded image visual make/model and angle review",
+          "identityEvidence": "Maruti Suzuki Swift hatchback; silver car, matching driveway and body details. Exact physical rental vehicle, engine and transmission are not verified.",
+          "depictedCatalogKey": "mumbai-2026-M01",
+          "setId": "Premnath-Kudva-Maruti-Suzuki-Swift",
+          "angle": "rear",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual framing, clarity and binary decode review",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T07:55:44.567Z",
+          "decoded": true,
+          "width": 2896,
+          "height": 1944,
+          "format": "jpeg",
+          "byteLength": 2524389,
+          "sha256": "44aa753dc86d3737bb865e95844e45178558c441167cada7e165d28b10de7c94",
+          "dHash": "1e84223707228cc1",
+          "finalUrl": "https://upload.wikimedia.org/wikipedia/commons/8/86/Maruti_Suzuki_Swift_2093.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "localFile": "../public/catalog-media/M01/reference-2.jpg",
+          "sourceLocation": "Maruti Suzuki Swift hatchback; silver car, matching driveway and body details."
+        }
+      ],
+      "photoBrief": "Front three-quarter; rear three-quarter; dashboard/cabin; optional full side or rear-seat view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-media/M01/reference-1.jpg",
+          "kind": "photograph",
+          "label": "right side — Reference Photos — Demo/Sample Listing",
+          "sha256": "8824333f01653238def61c80ef4f836bd65a3c55b9247b4ff01595ed66095e72"
+        },
+        {
+          "url": "/catalog-media/M01/reference-2.jpg",
+          "kind": "photograph",
+          "label": "rear — Reference Photos — Demo/Sample Listing",
+          "sha256": "44aa753dc86d3737bb865e95844e45178558c441167cada7e165d28b10de7c94"
+        }
+      ]
+    },
+    {
+      "key": "M03",
+      "listing": {
+        "_id": "6cd585740eddedd2507423b3",
+        "catalogKey": "mumbai-2026-M03",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Powai, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Powai",
+        "price": 2600,
+        "ratePeriod": "day",
+        "description": "Sample Hyundai i20 profile for Powai, illustrating a petrol, manual hatchback with 5 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Hyundai i20",
+        "fuel": "Petrol",
+        "transmission": "Manual",
+        "seats": 5,
+        "kind": "Car",
+        "category": "Hatchback",
+        "features": [
+          "Air conditioning",
+          "power windows",
+          "USB charging"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "approved"
+      },
+      "media": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/2015_Hyundai_i20_Premium_SE_MPi_1.4_Front.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:2015_Hyundai_i20_Premium_SE_MPi_1.4_Front.jpg",
+          "author": "Vauxford",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "2015 Hyundai i20 Premium SE MPi 1.4 Front.jpg — Vauxford, CC BY-SA 4.0. Original photograph; no alterations. Reference Photos — Demo/Sample Listing. Not verified Mumbai rental inventory.",
+          "licenseEvidence": "reference-photo-selection.json: File:2015 Hyundai i20 Premium SE MPi 1.4 Front.jpg; own-work copyright license from source page.",
+          "rightsReviewedBy": "Codex — source license/attribution review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — decoded image visual make/model and angle review",
+          "identityEvidence": "Hyundai i20 five-door hatchback, UK reference photographs; matching white car and parking location. Exact physical rental vehicle, engine and transmission are not verified.",
+          "depictedCatalogKey": "mumbai-2026-M03",
+          "setId": "Vauxford-2015-Hyundai-i20",
+          "angle": "front three-quarter",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual framing, clarity and binary decode review",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T07:55:44.597Z",
+          "decoded": true,
+          "width": 4569,
+          "height": 2543,
+          "format": "jpeg",
+          "byteLength": 5084372,
+          "sha256": "576611e1c8e889ed8db17b65897e955c37dbf6e75acd65e06a751511ae5074a1",
+          "dHash": "361773093d96e63a",
+          "finalUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1a/2015_Hyundai_i20_Premium_SE_MPi_1.4_Front.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "localFile": "../public/catalog-media/M03/reference-1.jpg",
+          "sourceLocation": "Hyundai i20 five-door hatchback, UK reference photographs; matching white car and parking location."
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/2015_Hyundai_i20_Premium_SE_MPi_1.4_Rear.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:2015_Hyundai_i20_Premium_SE_MPi_1.4_Rear.jpg",
+          "author": "Vauxford",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "2015 Hyundai i20 Premium SE MPi 1.4 Rear.jpg — Vauxford, CC BY-SA 4.0. Original photograph; no alterations. Reference Photos — Demo/Sample Listing. Not verified Mumbai rental inventory.",
+          "licenseEvidence": "reference-photo-selection.json: File:2015 Hyundai i20 Premium SE MPi 1.4 Rear.jpg; own-work copyright license from source page.",
+          "rightsReviewedBy": "Codex — source license/attribution review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — decoded image visual make/model and angle review",
+          "identityEvidence": "Hyundai i20 five-door hatchback, UK reference photographs; matching white car and parking location. Exact physical rental vehicle, engine and transmission are not verified.",
+          "depictedCatalogKey": "mumbai-2026-M03",
+          "setId": "Vauxford-2015-Hyundai-i20",
+          "angle": "rear three-quarter",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual framing, clarity and binary decode review",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T07:55:44.658Z",
+          "decoded": true,
+          "width": 4322,
+          "height": 2785,
+          "format": "jpeg",
+          "byteLength": 5564425,
+          "sha256": "c669cfd58a29b2b3592f3da0ae479e8aa33177632edd557f70537540d219af59",
+          "dHash": "67c961671b1a98d3",
+          "finalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/2015_Hyundai_i20_Premium_SE_MPi_1.4_Rear.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "localFile": "../public/catalog-media/M03/reference-2.jpg",
+          "sourceLocation": "Hyundai i20 five-door hatchback, UK reference photographs; matching white car and parking location."
+        }
+      ],
+      "photoBrief": "Front three-quarter; rear three-quarter; dashboard/cabin; optional full side or rear-seat view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-media/M03/reference-1.jpg",
+          "kind": "photograph",
+          "label": "front three-quarter — Reference Photos — Demo/Sample Listing",
+          "sha256": "576611e1c8e889ed8db17b65897e955c37dbf6e75acd65e06a751511ae5074a1"
+        },
+        {
+          "url": "/catalog-media/M03/reference-2.jpg",
+          "kind": "photograph",
+          "label": "rear three-quarter — Reference Photos — Demo/Sample Listing",
+          "sha256": "c669cfd58a29b2b3592f3da0ae479e8aa33177632edd557f70537540d219af59"
+        }
+      ]
+    },
+    {
+      "key": "M06",
+      "listing": {
+        "_id": "4a4e80e28bb1e3c763965e05",
+        "catalogKey": "mumbai-2026-M06",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Mulund West, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Mulund West",
+        "price": 2000,
+        "ratePeriod": "day",
+        "description": "Sample Tata Tiago profile for Mulund West, illustrating a petrol, manual hatchback with 5 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Tata Tiago",
+        "fuel": "Petrol",
+        "transmission": "Manual",
+        "seats": 5,
+        "kind": "Car",
+        "category": "Hatchback",
+        "features": [
+          "Air conditioning",
+          "power windows",
+          "USB charging"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "approved"
+      },
+      "media": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Tata_Tiago_%28116%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Tata_Tiago_(116).JPG",
+          "author": "El monty",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Tata Tiago (116).JPG — El monty, CC BY-SA 4.0. Original photograph, no alterations.",
+          "licenseEvidence": "Commons file metadata in media-candidates.json, M06: https://commons.wikimedia.org/wiki/File:Tata_Tiago_(116).JPG",
+          "rightsReviewedBy": "Codex — source copyright license review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — visual model/angle review, 20 October 2026",
+          "identityEvidence": "Visually matching blue Tata Tiago show car at Geneva Motor Show 2016. Model identity matches M06; exact engine/transmission/trim remains unverified in specificationReview.",
+          "depictedCatalogKey": "mumbai-2026-M06",
+          "setId": "El-monty-Tata-Tiago-Geneva-2016-blue",
+          "angle": "rear three-quarter",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual sharpness/framing and binary decode review",
+          "width": 4752,
+          "height": 3168,
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T06:34:25.797Z",
+          "decoded": true,
+          "sha256": "307f95186324784a9cd41a558780daf54c77f9b71ecdd7bba06f4e05311a969e",
+          "dHash": "8dca1a2f96d0e167",
+          "localFile": "catalog/source-assets/M06/tiago-1.jpg",
+          "sourceLocation": "Geneva Motor Show 2016; reference model photographs, not a vehicle available in Mumbai"
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Tata_Tiago_%28115%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Tata_Tiago_(115).JPG",
+          "author": "El monty",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Tata Tiago (115).JPG — El monty, CC BY-SA 4.0. Original photograph, no alterations.",
+          "licenseEvidence": "Commons file metadata in media-candidates.json, M06: https://commons.wikimedia.org/wiki/File:Tata_Tiago_(115).JPG",
+          "rightsReviewedBy": "Codex — source copyright license review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — visual model/angle review, 20 October 2026",
+          "identityEvidence": "Visually matching blue Tata Tiago show car at Geneva Motor Show 2016. Model identity matches M06; exact engine/transmission/trim remains unverified in specificationReview.",
+          "depictedCatalogKey": "mumbai-2026-M06",
+          "setId": "El-monty-Tata-Tiago-Geneva-2016-blue",
+          "angle": "right side",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual sharpness/framing and binary decode review",
+          "width": 4752,
+          "height": 3168,
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T06:34:27.220Z",
+          "decoded": true,
+          "sha256": "75f580596f10b150e3c2ea2e1afce1bfa056d2266a6a8f9ff5f1722fffecde29",
+          "dHash": "7c8f212b8fc6c43f",
+          "localFile": "catalog/source-assets/M06/tiago-2.jpg",
+          "sourceLocation": "Geneva Motor Show 2016; reference model photographs, not a vehicle available in Mumbai"
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Tata_Tiago_%28117%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Tata_Tiago_(117).JPG",
+          "author": "El monty",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Tata Tiago (117).JPG — El monty, CC BY-SA 4.0. Original photograph, no alterations.",
+          "licenseEvidence": "Commons file metadata in media-candidates.json, M06: https://commons.wikimedia.org/wiki/File:Tata_Tiago_(117).JPG",
+          "rightsReviewedBy": "Codex — source copyright license review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — visual model/angle review, 20 October 2026",
+          "identityEvidence": "Visually matching blue Tata Tiago show car at Geneva Motor Show 2016. Model identity matches M06; exact engine/transmission/trim remains unverified in specificationReview.",
+          "depictedCatalogKey": "mumbai-2026-M06",
+          "setId": "El-monty-Tata-Tiago-Geneva-2016-blue",
+          "angle": "front three-quarter",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual sharpness/framing and binary decode review",
+          "width": 4752,
+          "height": 3168,
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T06:35:57.364Z",
+          "decoded": true,
+          "sha256": "fcf27dd9e95421ee5eeb127d6b4485c2c49ef6f5ec090e5d7dda44703d48bc57",
+          "dHash": "22925e03a7e67038",
+          "localFile": "catalog/source-assets/M06/tiago-3.jpg",
+          "sourceLocation": "Geneva Motor Show 2016; reference model photographs, not a vehicle available in Mumbai"
+        }
+      ],
+      "photoBrief": "Front three-quarter; rear three-quarter; dashboard/cabin; optional full side or rear-seat view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Three source images establish a blue 2016 Geneva Tata Tiago show car; exact petrol/manual trim and feature list still need verification. These are reference-model photos, not Mumbai fleet stock."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-media/M06/tiago-1.jpg",
+          "kind": "photograph",
+          "label": "rear three-quarter",
+          "sha256": "307f95186324784a9cd41a558780daf54c77f9b71ecdd7bba06f4e05311a969e"
+        },
+        {
+          "url": "/catalog-media/M06/tiago-2.jpg",
+          "kind": "photograph",
+          "label": "right side",
+          "sha256": "75f580596f10b150e3c2ea2e1afce1bfa056d2266a6a8f9ff5f1722fffecde29"
+        },
+        {
+          "url": "/catalog-media/M06/tiago-3.jpg",
+          "kind": "photograph",
+          "label": "front three-quarter",
+          "sha256": "fcf27dd9e95421ee5eeb127d6b4485c2c49ef6f5ec090e5d7dda44703d48bc57"
+        }
+      ]
+    },
+    {
+      "key": "M10",
+      "listing": {
+        "_id": "6ecb9b35d518eb9846df3f33",
+        "catalogKey": "mumbai-2026-M10",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Santacruz East, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Santacruz East",
+        "price": 3200,
+        "ratePeriod": "day",
+        "description": "Sample Honda City profile for Santacruz East, illustrating a petrol, cvt automatic sedan with 5 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Honda City",
+        "fuel": "Petrol",
+        "transmission": "CVT automatic",
+        "seats": 5,
+        "kind": "Car",
+        "category": "Sedan",
+        "features": [
+          "Air conditioning",
+          "power windows",
+          "USB charging",
+          "rear parking assistance"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "approved"
+      },
+      "media": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/2022_Honda_City_ZX_i-VTEC_%28India%29_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:2022_Honda_City_ZX_i-VTEC_(India)_front_view.jpg",
+          "author": "Dairokkan9",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "2022 Honda City ZX i-VTEC (India) front view.jpg — Dairokkan9, CC BY-SA 4.0. Original photograph; no alterations. Reference Photos — Demo/Sample Listing. Not verified Mumbai rental inventory.",
+          "licenseEvidence": "reference-photo-selection.json: File:2022 Honda City ZX i-VTEC (India) front view.jpg; own-work copyright license from source page.",
+          "rightsReviewedBy": "Codex — source license/attribution review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — decoded image visual make/model and angle review",
+          "identityEvidence": "Honda City ZX i-VTEC sedan in India; matching red car, wheels and parking location. Exact physical rental vehicle, engine and transmission are not verified.",
+          "depictedCatalogKey": "mumbai-2026-M10",
+          "setId": "Dairokkan9-2022-Honda-City-India",
+          "angle": "front three-quarter",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual framing, clarity and binary decode review",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T07:55:44.728Z",
+          "decoded": true,
+          "width": 4096,
+          "height": 2304,
+          "format": "jpeg",
+          "byteLength": 5117157,
+          "sha256": "6c92c65dcd7de4f4887b7666fd3c8ac1ccaadcd4b5f958a29dc580ff79b3227d",
+          "dHash": "a6c65bb8b4d8c1c7",
+          "finalUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5c/2022_Honda_City_ZX_i-VTEC_%28India%29_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "localFile": "../public/catalog-media/M10/reference-1.jpg",
+          "sourceLocation": "Honda City ZX i-VTEC sedan in India; matching red car, wheels and parking location."
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/2022_Honda_City_ZX_i-VTEC_%28India%29_rear_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:2022_Honda_City_ZX_i-VTEC_(India)_rear_view.jpg",
+          "author": "Dairokkan9",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "2022 Honda City ZX i-VTEC (India) rear view.jpg — Dairokkan9, CC BY-SA 4.0. Original photograph; no alterations. Reference Photos — Demo/Sample Listing. Not verified Mumbai rental inventory.",
+          "licenseEvidence": "reference-photo-selection.json: File:2022 Honda City ZX i-VTEC (India) rear view.jpg; own-work copyright license from source page.",
+          "rightsReviewedBy": "Codex — source license/attribution review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — decoded image visual make/model and angle review",
+          "identityEvidence": "Honda City ZX i-VTEC sedan in India; matching red car, wheels and parking location. Exact physical rental vehicle, engine and transmission are not verified.",
+          "depictedCatalogKey": "mumbai-2026-M10",
+          "setId": "Dairokkan9-2022-Honda-City-India",
+          "angle": "rear three-quarter",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual framing, clarity and binary decode review",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T07:55:44.776Z",
+          "decoded": true,
+          "width": 4096,
+          "height": 2304,
+          "format": "jpeg",
+          "byteLength": 4825770,
+          "sha256": "5f1681339bbd32c253c7826c6343ea53919a50d7df37a53b2a7f299b087f894a",
+          "dHash": "9c0c87fcb8ccec78",
+          "finalUrl": "https://upload.wikimedia.org/wikipedia/commons/9/91/2022_Honda_City_ZX_i-VTEC_%28India%29_rear_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "localFile": "../public/catalog-media/M10/reference-2.jpg",
+          "sourceLocation": "Honda City ZX i-VTEC sedan in India; matching red car, wheels and parking location."
+        }
+      ],
+      "photoBrief": "Front three-quarter; rear three-quarter; dashboard/cabin; optional full side or rear-seat view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-media/M10/reference-1.jpg",
+          "kind": "photograph",
+          "label": "front three-quarter — Reference Photos — Demo/Sample Listing",
+          "sha256": "6c92c65dcd7de4f4887b7666fd3c8ac1ccaadcd4b5f958a29dc580ff79b3227d"
+        },
+        {
+          "url": "/catalog-media/M10/reference-2.jpg",
+          "kind": "photograph",
+          "label": "rear three-quarter — Reference Photos — Demo/Sample Listing",
+          "sha256": "5f1681339bbd32c253c7826c6343ea53919a50d7df37a53b2a7f299b087f894a"
+        }
+      ]
+    },
+    {
+      "key": "M15",
+      "listing": {
+        "_id": "2d443bc2d2a2d792502442e8",
+        "catalogKey": "mumbai-2026-M15",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Wadala, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Wadala",
+        "price": 3200,
+        "ratePeriod": "day",
+        "description": "Sample Tata Nexon profile for Wadala, illustrating a petrol, manual suv with 5 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Tata Nexon",
+        "fuel": "Petrol",
+        "transmission": "Manual",
+        "seats": 5,
+        "kind": "Car",
+        "category": "SUV",
+        "features": [
+          "Air conditioning",
+          "power windows",
+          "USB charging"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "approved"
+      },
+      "media": [
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/2023_Tata_Nexon_XZA%2B_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:2023_Tata_Nexon_XZA%2B_front_view.jpg",
+          "author": "Dairokkan9",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "2023 Tata Nexon XZA+ front view.jpg — Dairokkan9, CC BY-SA 4.0. Original photograph; no alterations. Reference Photos — Demo/Sample Listing. Not verified Mumbai rental inventory.",
+          "licenseEvidence": "reference-photo-selection.json: File:2023 Tata Nexon XZA+ front view.jpg; own-work copyright license from source page.",
+          "rightsReviewedBy": "Codex — source license/attribution review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — decoded image visual make/model and angle review",
+          "identityEvidence": "Tata Nexon XZA+ reference model, matching dark blue body, wheels and exhibition setting. Reference trim/transmission may differ from fictional listing. Exact physical rental vehicle, engine and transmission are not verified.",
+          "depictedCatalogKey": "mumbai-2026-M15",
+          "setId": "Dairokkan9-2023-Tata-Nexon",
+          "angle": "front three-quarter",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual framing, clarity and binary decode review",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T07:55:44.826Z",
+          "decoded": true,
+          "width": 4096,
+          "height": 2304,
+          "format": "jpeg",
+          "byteLength": 2502288,
+          "sha256": "92d189d444c5f8dfbbbc8e8fcb40eab1e197653e5b6d2d6b1072185daa192d4e",
+          "dHash": "d8f8f2d294d8a8e4",
+          "finalUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e5/2023_Tata_Nexon_XZA%2B_front_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "localFile": "../public/catalog-media/M15/reference-1.jpg",
+          "sourceLocation": "Tata Nexon XZA+ reference model, matching dark blue body, wheels and exhibition setting. Reference trim/transmission may differ from fictional listing."
+        },
+        {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/2023_Tata_Nexon_XZA%2B_rear_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:2023_Tata_Nexon_XZA%2B_rear_view.jpg",
+          "author": "Dairokkan9",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "2023 Tata Nexon XZA+ rear view.jpg — Dairokkan9, CC BY-SA 4.0. Original photograph; no alterations. Reference Photos — Demo/Sample Listing. Not verified Mumbai rental inventory.",
+          "licenseEvidence": "reference-photo-selection.json: File:2023 Tata Nexon XZA+ rear view.jpg; own-work copyright license from source page.",
+          "rightsReviewedBy": "Codex — source license/attribution review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — decoded image visual make/model and angle review",
+          "identityEvidence": "Tata Nexon XZA+ reference model, matching dark blue body, wheels and exhibition setting. Reference trim/transmission may differ from fictional listing. Exact physical rental vehicle, engine and transmission are not verified.",
+          "depictedCatalogKey": "mumbai-2026-M15",
+          "setId": "Dairokkan9-2023-Tata-Nexon",
+          "angle": "rear three-quarter",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual framing, clarity and binary decode review",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T07:55:44.857Z",
+          "decoded": true,
+          "width": 4096,
+          "height": 2304,
+          "format": "jpeg",
+          "byteLength": 2761771,
+          "sha256": "c7761b21bca7a09e89d438032c4bbd3726fd12d445edfda699cb87f8dfd0cca9",
+          "dHash": "eaf0b2e88ca0c8ec",
+          "finalUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/2023_Tata_Nexon_XZA%2B_rear_view.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "localFile": "../public/catalog-media/M15/reference-2.jpg",
+          "sourceLocation": "Tata Nexon XZA+ reference model, matching dark blue body, wheels and exhibition setting. Reference trim/transmission may differ from fictional listing."
+        }
+      ],
+      "photoBrief": "Front three-quarter; rear three-quarter; dashboard/cabin; optional full side or rear-seat view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-media/M15/reference-1.jpg",
+          "kind": "photograph",
+          "label": "front three-quarter — Reference Photos — Demo/Sample Listing",
+          "sha256": "92d189d444c5f8dfbbbc8e8fcb40eab1e197653e5b6d2d6b1072185daa192d4e"
+        },
+        {
+          "url": "/catalog-media/M15/reference-2.jpg",
+          "kind": "photograph",
+          "label": "rear three-quarter — Reference Photos — Demo/Sample Listing",
+          "sha256": "c7761b21bca7a09e89d438032c4bbd3726fd12d445edfda699cb87f8dfd0cca9"
+        }
+      ]
+    },
+    {
+      "key": "M17",
+      "listing": {
+        "_id": "83c684b8d331de797907cc73",
+        "catalogKey": "mumbai-2026-M17",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Powai, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Powai",
+        "price": 4000,
+        "ratePeriod": "day",
+        "description": "Sample Kia Seltos profile for Powai, illustrating a petrol, automatic suv with 5 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Kia Seltos",
+        "fuel": "Petrol",
+        "transmission": "Automatic",
+        "seats": 5,
+        "kind": "Car",
+        "category": "SUV",
+        "features": [
+          "Air conditioning",
+          "power windows",
+          "USB charging",
+          "rear parking assistance"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "approved"
+      },
+      "media": [
+        {
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Kia_Seltos_2024_2.jpg/1920px-Kia_Seltos_2024_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Kia_Seltos_2024_2.jpg",
+          "author": "Ganesh Mohan T",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Kia Seltos 2024 2.jpg — Ganesh Mohan T, CC BY-SA 4.0. Wikimedia resized derivative; no further alterations. Reference Photos — Demo/Sample Listing. Not verified Mumbai rental inventory.",
+          "licenseEvidence": "reference-photo-selection.json: File:Kia Seltos 2024 2.jpg; own-work copyright license from source page.",
+          "rightsReviewedBy": "Codex — source license/attribution review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — decoded image visual make/model and angle review",
+          "identityEvidence": "Kia Seltos facelift photographed in Kerala; matching red showroom car, front details and background. Exact physical rental vehicle, engine and transmission are not verified.",
+          "depictedCatalogKey": "mumbai-2026-M17",
+          "setId": "Ganesh-Mohan-T-2024-Kia-Seltos-red",
+          "angle": "front left three-quarter",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual framing, clarity and binary decode review",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T07:55:44.891Z",
+          "decoded": true,
+          "width": 1920,
+          "height": 1440,
+          "format": "jpeg",
+          "byteLength": 561385,
+          "sha256": "20ffe14df564b8876159198801f899149eaa1e689ae463f4d2da03380be2bb89",
+          "dHash": "636cc87a32e8e3e7",
+          "finalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Kia_Seltos_2024_2.jpg/1920px-Kia_Seltos_2024_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "localFile": "../public/catalog-media/M17/reference-1.jpg",
+          "sourceLocation": "Kia Seltos facelift photographed in Kerala; matching red showroom car, front details and background."
+        },
+        {
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Kia_Seltos_2024_3.jpg/1920px-Kia_Seltos_2024_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "sourcePage": "https://commons.wikimedia.org/wiki/File:Kia_Seltos_2024_3.jpg",
+          "author": "Ganesh Mohan T",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+          "attribution": "Kia Seltos 2024 3.jpg — Ganesh Mohan T, CC BY-SA 4.0. Wikimedia resized derivative; no further alterations. Reference Photos — Demo/Sample Listing. Not verified Mumbai rental inventory.",
+          "licenseEvidence": "reference-photo-selection.json: File:Kia Seltos 2024 3.jpg; own-work copyright license from source page.",
+          "rightsReviewedBy": "Codex — source license/attribution review, 20 October 2026",
+          "rightsApproved": true,
+          "kind": "photograph",
+          "matchApproved": true,
+          "matchReviewedBy": "Codex — decoded image visual make/model and angle review",
+          "identityEvidence": "Kia Seltos facelift photographed in Kerala; matching red showroom car, front details and background. Exact physical rental vehicle, engine and transmission are not verified.",
+          "depictedCatalogKey": "mumbai-2026-M17",
+          "setId": "Ganesh-Mohan-T-2024-Kia-Seltos-red",
+          "angle": "straight front",
+          "qualityApproved": true,
+          "qualityReviewedBy": "Codex — visual framing, clarity and binary decode review",
+          "httpStatus": 200,
+          "checkedAt": "2026-10-20T07:55:44.903Z",
+          "decoded": true,
+          "width": 1920,
+          "height": 1440,
+          "format": "jpeg",
+          "byteLength": 499957,
+          "sha256": "37ed38dbde71e32bc2f075fa281953f84d44a31f2646e375308f9410ff3b5700",
+          "dHash": "cc33310c344c6870",
+          "finalUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Kia_Seltos_2024_3.jpg/1920px-Kia_Seltos_2024_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "localFile": "../public/catalog-media/M17/reference-2.jpg",
+          "sourceLocation": "Kia Seltos facelift photographed in Kerala; matching red showroom car, front details and background."
+        }
+      ],
+      "photoBrief": "Front three-quarter; rear three-quarter; dashboard/cabin; optional full side or rear-seat view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-media/M17/reference-1.jpg",
+          "kind": "photograph",
+          "label": "front left three-quarter — Reference Photos — Demo/Sample Listing",
+          "sha256": "20ffe14df564b8876159198801f899149eaa1e689ae463f4d2da03380be2bb89"
+        },
+        {
+          "url": "/catalog-media/M17/reference-2.jpg",
+          "kind": "photograph",
+          "label": "straight front — Reference Photos — Demo/Sample Listing",
+          "sha256": "37ed38dbde71e32bc2f075fa281953f84d44a31f2646e375308f9410ff3b5700"
+        }
+      ]
+    },
+    {
+      "key": "M20",
+      "listing": {
+        "_id": "83484e918933ac5b66542930",
+        "catalogKey": "mumbai-2026-M20",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Andheri East, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Andheri East",
+        "price": 5500,
+        "ratePeriod": "day",
+        "description": "Sample Mahindra XUV700 profile for Andheri East, illustrating a diesel, automatic suv with 7 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Mahindra XUV700",
+        "fuel": "Diesel",
+        "transmission": "Automatic",
+        "seats": 7,
+        "kind": "Car",
+        "category": "SUV",
+        "features": [
+          "Air conditioning",
+          "three-row seating",
+          "power windows",
+          "USB charging"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Front three-quarter; rear three-quarter; dashboard/cabin; optional full side or rear-seat view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/M20-1.svg",
+          "kind": "placeholder",
+          "label": "Front view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "37211fa92c967ceab1dc0c50f64f845aefb0743f0a0ba2df39d2e5ce8bc0ea3e"
+        },
+        {
+          "url": "/catalog-placeholders/M20-2.svg",
+          "kind": "placeholder",
+          "label": "Rear view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "c11eb5c8b9026815c5e184f72f3df8662cda60fa1d5d96eeb2fd50d01f336c93"
+        }
+      ]
+    },
+    {
+      "key": "M22",
+      "listing": {
+        "_id": "0e13735bbe16c5b824845bc4",
+        "catalogKey": "mumbai-2026-M22",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Bandra West, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Bandra West",
+        "price": 6500,
+        "ratePeriod": "day",
+        "description": "Sample Toyota Fortuner profile for Bandra West, illustrating a diesel, automatic suv with 7 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Toyota Fortuner",
+        "fuel": "Diesel",
+        "transmission": "Automatic",
+        "seats": 7,
+        "kind": "Car",
+        "category": "SUV",
+        "features": [
+          "Air conditioning",
+          "three-row seating",
+          "power windows",
+          "USB charging"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Front three-quarter; rear three-quarter; dashboard/cabin; optional full side or rear-seat view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/M22-1.svg",
+          "kind": "placeholder",
+          "label": "Front view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "abb09b1dedf495ccecb6020f0e98adebb28e9ed2d1da5b219a709b869e222e66"
+        },
+        {
+          "url": "/catalog-placeholders/M22-2.svg",
+          "kind": "placeholder",
+          "label": "Rear view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "f2ea54f0912e7e28f1d0a05ab7af52a420f1c4ca9f1d36beb39388362ad17ecf"
+        }
+      ]
+    },
+    {
+      "key": "M23",
+      "listing": {
+        "_id": "f209e55d7438096551eecdcf",
+        "catalogKey": "mumbai-2026-M23",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Bhandup West, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Bhandup West",
+        "price": 3300,
+        "ratePeriod": "day",
+        "description": "Sample Maruti Suzuki Ertiga profile for Bhandup West, illustrating a petrol, manual mpv with 7 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Maruti Suzuki Ertiga",
+        "fuel": "Petrol",
+        "transmission": "Manual",
+        "seats": 7,
+        "kind": "Car",
+        "category": "MPV",
+        "features": [
+          "Air conditioning",
+          "three-row seating",
+          "power windows",
+          "USB charging"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Front three-quarter; rear three-quarter; dashboard/cabin; optional full side or rear-seat view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/M23-1.svg",
+          "kind": "placeholder",
+          "label": "Front view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "505e3528db277c569e868c69ca7d923af49aa634e7e1d4b34df1696b94521ebc"
+        },
+        {
+          "url": "/catalog-placeholders/M23-2.svg",
+          "kind": "placeholder",
+          "label": "Rear view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "f5b6e543501ac4ae310f89455a39210b6be12f2cb6c8804dc6d5ab047a2768a4"
+        }
+      ]
+    },
+    {
+      "key": "M25",
+      "listing": {
+        "_id": "d3ec4ac305840d72986c01a2",
+        "catalogKey": "mumbai-2026-M25",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Dadar East, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Dadar East",
+        "price": 600,
+        "ratePeriod": "day",
+        "description": "Sample Honda Activa 110 profile for Dadar East, illustrating a petrol, automatic scooter with 2 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Honda Activa 110",
+        "fuel": "Petrol",
+        "transmission": "Automatic",
+        "seats": 2,
+        "kind": "Bike",
+        "category": "Scooter",
+        "features": [
+          "Under-seat storage",
+          "automatic transmission",
+          "mirrors",
+          "helmet provision subject to sample policy"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Left/front three-quarter; right/rear three-quarter; cockpit/instruments; optional full side view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/M25-1.svg",
+          "kind": "placeholder",
+          "label": "Front view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "f370ef1ededdc233f116603972023faebc18aadd5677b2d5238ce34c03427421"
+        },
+        {
+          "url": "/catalog-placeholders/M25-2.svg",
+          "kind": "placeholder",
+          "label": "Rear view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "2558276f13b90488c2ca8d9fce8dc5a95b80cafc001c44eac1b53a8cb29742cc"
+        }
+      ]
+    },
+    {
+      "key": "M26",
+      "listing": {
+        "_id": "d72903388f77126b2c9c609e",
+        "catalogKey": "mumbai-2026-M26",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Andheri West, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Andheri West",
+        "price": 650,
+        "ratePeriod": "day",
+        "description": "Sample TVS Jupiter 125 profile for Andheri West, illustrating a petrol, automatic scooter with 2 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "TVS Jupiter 125",
+        "fuel": "Petrol",
+        "transmission": "Automatic",
+        "seats": 2,
+        "kind": "Bike",
+        "category": "Scooter",
+        "features": [
+          "Under-seat storage",
+          "automatic transmission",
+          "mirrors",
+          "helmet provision subject to sample policy"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Left/front three-quarter; right/rear three-quarter; cockpit/instruments; optional full side view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/M26-1.svg",
+          "kind": "placeholder",
+          "label": "Front view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "852a0bb2d3d5eb64cdee42cbb7e1027c286e2f54f6a84acbb6333fc51ffbccbd"
+        },
+        {
+          "url": "/catalog-placeholders/M26-2.svg",
+          "kind": "placeholder",
+          "label": "Rear view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "eb2a351edb464781bd7d70e375c710c42e17587208eef1195df004225e4f98d5"
+        }
+      ]
+    },
+    {
+      "key": "M31",
+      "listing": {
+        "_id": "078aea51a4812985c627774d",
+        "catalogKey": "mumbai-2026-M31",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Kurla West, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Kurla West",
+        "price": 950,
+        "ratePeriod": "day",
+        "description": "Sample Bajaj Pulsar NS200 profile for Kurla West, illustrating a petrol, manual sport bike with 2 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Bajaj Pulsar NS200",
+        "fuel": "Petrol",
+        "transmission": "Manual",
+        "seats": 2,
+        "kind": "Bike",
+        "category": "Sport bike",
+        "features": [
+          "Manual transmission",
+          "mirrors",
+          "front disc brake",
+          "helmet provision subject to sample policy"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Left/front three-quarter; right/rear three-quarter; cockpit/instruments; optional full side view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/M31-1.svg",
+          "kind": "placeholder",
+          "label": "Front view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "ec56c40dc9815c58be628ff65f45f9e90872d2d3a1054894fb5a7a6ad798889a"
+        },
+        {
+          "url": "/catalog-placeholders/M31-2.svg",
+          "kind": "placeholder",
+          "label": "Rear view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "aec7e8ef3fc948266574baaf65e80a09e5c640bbc49a471b359811991d66cbe8"
+        }
+      ]
+    },
+    {
+      "key": "M33",
+      "listing": {
+        "_id": "1fce443ac81d19a04b39aa5d",
+        "catalogKey": "mumbai-2026-M33",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Bandra West, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Bandra West",
+        "price": 1000,
+        "ratePeriod": "day",
+        "description": "Sample Royal Enfield Hunter 350 profile for Bandra West, illustrating a petrol, manual roadster with 2 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Royal Enfield Hunter 350",
+        "fuel": "Petrol",
+        "transmission": "Manual",
+        "seats": 2,
+        "kind": "Bike",
+        "category": "Roadster",
+        "features": [
+          "Manual transmission",
+          "mirrors",
+          "disc brakes",
+          "helmet provision subject to sample policy"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Left/front three-quarter; right/rear three-quarter; cockpit/instruments; optional full side view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/M33-1.svg",
+          "kind": "placeholder",
+          "label": "Front view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "838d9c436ab380fb8145eca5f76f0597dab59e3b5be87656689131cbe8517b05"
+        },
+        {
+          "url": "/catalog-placeholders/M33-2.svg",
+          "kind": "placeholder",
+          "label": "Rear view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "a604e9a337575d5554bfecc070a6289814c176740944eda49474c5b7c2b838a5"
+        }
+      ]
+    },
+    {
+      "key": "M36",
+      "listing": {
+        "_id": "cc5b566de76e95eae368a501",
+        "catalogKey": "mumbai-2026-M36",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Powai, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Powai",
+        "price": 1600,
+        "ratePeriod": "day",
+        "description": "Sample Royal Enfield Himalayan 450 profile for Powai, illustrating a petrol, manual adventure with 2 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Royal Enfield Himalayan 450",
+        "fuel": "Petrol",
+        "transmission": "Manual",
+        "seats": 2,
+        "kind": "Bike",
+        "category": "Adventure",
+        "features": [
+          "Manual transmission",
+          "mirrors",
+          "disc brakes",
+          "helmet provision subject to sample policy"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Left/front three-quarter; right/rear three-quarter; cockpit/instruments; optional full side view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/M36-1.svg",
+          "kind": "placeholder",
+          "label": "Front view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "5b5a23403a273bb8544c0c73a3b0b0cc12ea988265c85822512eecb0b2f1e4aa"
+        },
+        {
+          "url": "/catalog-placeholders/M36-2.svg",
+          "kind": "placeholder",
+          "label": "Rear view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "e2088b5547c4fe5d9a08d7cdcb8bef6b1c9bb47a57b63a5f10a1f189f785a9b5"
+        }
+      ]
+    },
+    {
+      "key": "M38",
+      "listing": {
+        "_id": "cb179880c4330d055438017b",
+        "catalogKey": "mumbai-2026-M38",
+        "importBatch": "mumbai-2026-v1",
+        "host": "6ad4aa8b98166bf0d4230f0c",
+        "type": "vehicle",
+        "location": "Bandra East, Mumbai, Maharashtra",
+        "city": "Mumbai",
+        "areaName": "Bandra East",
+        "price": 2200,
+        "ratePeriod": "day",
+        "description": "Sample Kawasaki Ninja 300 profile for Bandra East, illustrating a petrol, manual sport bike with 2 proposed seats. Use this example to explore a pending booking request; it is not a verified offer or real reservation. Photos and final specifications must match the selected model variant.",
+        "inventoryKind": "sample",
+        "sampleDisclosure": "Sample inventory — not a verified rental offer or real reservation.",
+        "publicationState": "draft",
+        "status": "available",
+        "gallery": [],
+        "image": "",
+        "badge": "Sample inventory",
+        "name": "Kawasaki Ninja 300",
+        "fuel": "Petrol",
+        "transmission": "Manual",
+        "seats": 2,
+        "kind": "Bike",
+        "category": "Sport bike",
+        "features": [
+          "Manual transmission",
+          "mirrors",
+          "front disc brake",
+          "helmet provision subject to sample policy"
+        ]
+      },
+      "approval": {
+        "details": "pending",
+        "owner": "pending",
+        "media": "missing"
+      },
+      "media": [],
+      "photoBrief": "Left/front three-quarter; right/rear three-quarter; cockpit/instruments; optional full side view. Require three or four genuine, distinct photographs of the correct model, preferably from one shoot. Acquisition and licensing status: **not acquired/not approved**.",
+      "pricing": {
+        "researchDate": "2026-10-20",
+        "basis": "Proposed sample estimate from approved planning report; not a supplier quotation",
+        "sourceReport": "RentSphere-Mumbai-Catalog-Plan.md"
+      },
+      "specificationReview": {
+        "status": "pending",
+        "note": "Validate depicted generation/variant or same-property features against final photographs before approval."
+      },
+      "previewGallery": [
+        {
+          "url": "/catalog-placeholders/M38-1.svg",
+          "kind": "placeholder",
+          "label": "Front view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "fcb2c065c44d63517345170463401429c987b825b2ce713625de0c090b29b4e3"
+        },
+        {
+          "url": "/catalog-placeholders/M38-2.svg",
+          "kind": "placeholder",
+          "label": "Rear view photo unavailable — Demo/Sample",
+          "attribution": "RentSphere original text-only placeholder; not a photograph.",
+          "sha256": "91215b32f6ed7b3602059aebfb00c10b8b676dfca3b20ff28d8cb4a879864123"
+        }
+      ]
+    }
+  ]
+}

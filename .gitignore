@@ -4,5 +4,11 @@ dist/
 .env
 .env.local
 server/.env
+server/.env.staging.local
+server/.staging-backups/
+server/.staging-plans/
 
 server/uploads/
+
+/uploads/
+/tmp/

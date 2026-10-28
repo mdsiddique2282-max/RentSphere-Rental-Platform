@@ -9,6 +9,8 @@ import listingRoutes from './routes/listings.js';
 import bookingRoutes from './routes/bookings.js';
 import adminRoutes from './routes/admin.js';
 import ownerRoutes from './routes/owner.js';
+import savedRoutes from './routes/saved.js';
+import passwordResetRoutes from './routes/passwordReset.js';
 import connectDB from './db.js';
 
 import path from 'path';
@@ -17,6 +19,7 @@ import { fileURLToPath } from 'url';
 import { isServerless } from './utils/uploadImages.js';
 import { requireJwtSecret } from './utils/tokens.js';
 import { servePublicListingUpload } from './utils/ownerDocuments.js';
+import { stagingListingPresentation, stagingInterestWorkflow } from './utils/stagingParity.js';
 
 // Fail at startup rather than issue or accept tokens signed with a default key.
 requireJwtSecret();
@@ -38,18 +41,22 @@ app.use(async (req, res, next) => {
     await connectDB();
     next();
   } catch (error) {
-    console.error('MongoDB connection error:', error.message);
-    next();
+    console.error('Staging database connection failed.');
+    res.status(503).json({ message: 'Database is temporarily unavailable.' });
   }
 });
 
 app.use('/uploads', servePublicListingUpload);
 
 app.use('/api/auth', authRoutes);
+app.use('/api/auth', passwordResetRoutes);
+app.use('/api/listings', stagingListingPresentation);
 app.use('/api/listings', listingRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/owner', ownerRoutes);
+app.use('/api/saved', savedRoutes);
+app.use('/api/preview', stagingInterestWorkflow);
 
 if (!isServerless()) {
   const PORT = process.env.PORT || 5000;

@@ -1,238 +1,74 @@
-import { useContext, useEffect, useState } from 'react';
+import { openPrivateOwnerDocument } from '../data/ownerDocuments';
+import HistoryConfirmation from './HistoryConfirmation';
+import { useContext, useCallback, useEffect, useRef, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { formatPrice } from '../data/listings';
+import ListingControls from './ListingControls';
+import AdminRequests from './AdminRequests';
+import HostingForm from './HostingForm';
+
+export function filterAdminProducts(products, type, search) {
+  const query = search.trim().toLowerCase();
+  return products.filter(product => (type === 'all' || product.type === type) && [product.title, product.name].some(value => String(value || '').toLowerCase().includes(query)));
+}
+export const adminListingPath = product => `/${product.type === 'property' ? 'properties' : 'vehicles'}/${product._id}`;
+export function AdminProductFilters({ products, type, search, onTypeChange, onSearchChange }) {
+  return <div className="admin-product-filters"><div className="admin-product-tabs" role="group" aria-label="Product type">
+    {[['all', 'All Products'], ['property', 'Properties'], ['vehicle', 'Vehicles']].map(([value, label]) => <button type="button" key={value} className={`admin-product-tab${type === value ? ' is-active' : ''}`} aria-pressed={type === value} onClick={() => onTypeChange(value)}>{label} ({value === 'all' ? products.length : products.filter(product => product.type === value).length})</button>)}
+  </div><label className="admin-product-search"><span>Search products</span><input type="search" placeholder="Search properties or vehicles by name..." value={search} onChange={event => onSearchChange(event.target.value)} /></label></div>;
+}
 
 export default function AdminPanel() {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [activeTab, setActiveTab] = useState('overview'); // 'overview', 'users', 'products', 'add_product', 'owners'
+  const [activeTab, setActiveTab] = useState('overview');
   const [stats, setStats] = useState(null);
   const [usersList, setUsersList] = useState([]);
   const [productsList, setProductsList] = useState([]);
+  const [productType, setProductType] = useState('all'), [productSearch, setProductSearch] = useState('');
   const [ownersList, setOwnersList] = useState([]);
   const [rejectingId, setRejectingId] = useState(null);
   const [rejectNote, setRejectNote] = useState('');
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
   const [actionMessage, setActionMessage] = useState('');
+  const [revoke, setRevoke] = useState(null), [revoking, setRevoking] = useState(false), [revokeError, setRevokeError] = useState('');
+  const ownerActionLock = useRef(false), documentCleanups = useRef([]), tokenRef = useRef(user?.token); tokenRef.current = user?.token;
+  const closeRevoke = useCallback(() => { setRevoke(null); setRevokeError(''); }, []);
+  useEffect(() => () => { documentCleanups.current.forEach(clean => clean()); documentCleanups.current = []; }, [user?.token]);
+  const openOwnerDocument = async (event, ownerId, index) => {
+    event.preventDefault(); const token = user.token; setErrorMsg('');
+    try { const cleanup = await openPrivateOwnerDocument({ ownerId, index, token, isCurrent: () => tokenRef.current === token }); documentCleanups.current.push(cleanup); }
+    catch (error) { if (tokenRef.current === token) setErrorMsg(error.message || 'Unable to open the document.'); }
+  };
+  const revokeOwner = async () => {
+    if (!revoke || ownerActionLock.current || revoke.token !== user.token) return;
+    const token = user.token; ownerActionLock.current = true; setRevoking(true); setRevokeError('');
+    try {
+      const response = await fetch('/api/admin/owners/' + revoke._id + '/revoke', { method: 'PUT', headers: { Authorization: 'Bearer ' + token } });
+      const data = await response.json(); if (!response.ok) throw new Error(data.message || 'Unable to revoke owner access.');
+      if (tokenRef.current !== token) return;
+      closeRevoke(); setActionMessage(data.message); await loadAdminData();
+    } catch (error) { if (tokenRef.current === token) setRevokeError(error.message); }
+    finally { ownerActionLock.current = false; if (tokenRef.current === token) setRevoking(false); }
+  };
   const [deleteModal, setDeleteModal] = useState(null);
 
-  // Admin Add Product Form State
-  const [productForm, setProductForm] = useState({
-    type: 'property',
-    name: '',
-    category: 'Apartment',
-    location: '',
-    price: '',
-    description: ''
-  });
-  const [files, setFiles] = useState([]);
-  const [previews, setPreviews] = useState([]);
-  const [submittingProduct, setSubmittingProduct] = useState(false);
-  const [formSuccess, setFormSuccess] = useState('');
-  const [formError, setFormError] = useState('');
-
-  const fetchStats = async () => {
+  const readAdmin = async (path, setter) => {
     try {
-      const res = await fetch('/api/admin/stats', {
-        headers: { Authorization: `Bearer ${user?.token || ''}` }
-      });
-      let data = null;
-      if (res.ok) {
-        try {
-          const text = await res.text();
-          data = text ? JSON.parse(text) : null;
-        } catch (e) {}
-      }
-      if (data) {
-        setStats(data);
-      } else {
-        setStats({
-          totalUsers: Math.max(usersList.length, 3),
-          totalProducts: productsList.length || 4,
-          totalVehicles: productsList.filter(p => p.type === 'vehicle').length || 2,
-          totalRooms: productsList.filter(p => p.type === 'property').length || 2,
-          totalBookings: 0,
-          totalCategories: 6,
-          userUploadedProductsCount: productsList.length || 4,
-          recentProducts: productsList.slice(0, 5) || []
-        });
-      }
-    } catch (err) {
-      console.error('Error fetching admin stats:', err);
-    }
+      const res = await fetch('/api/admin/' + path, { headers: { Authorization: 'Bearer ' + (user?.token || '') } });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Unable to load ' + path);
+      setter(data);
+    } catch (error) { setErrorMsg(error.message); }
   };
+  const fetchStats = () => readAdmin('stats', setStats);
+  const fetchUsers = () => readAdmin('users', setUsersList);
+  const fetchProducts = () => readAdmin('listings', setProductsList);
 
-  const fetchUsers = async () => {
-    try {
-      const res = await fetch('/api/admin/users', {
-        headers: { Authorization: `Bearer ${user?.token || ''}` }
-      });
-      let data = [];
-      if (res.ok) {
-        try {
-          const text = await res.text();
-          data = text ? JSON.parse(text) : [];
-        } catch (e) {}
-      }
-      if (Array.isArray(data) && data.length > 0) {
-        setUsersList(data);
-      } else {
-        setUsersList([
-          {
-            _id: user?._id || 'admin-1',
-            name: user?.name || 'Admin User',
-            email: user?.email || 'admin@rentsphere.com',
-            role: user?.role || 'admin',
-            productCount: 2,
-            createdAt: new Date()
-          },
-          {
-            _id: 'user-2',
-            name: 'John Doe',
-            email: 'john@example.com',
-            role: 'user',
-            productCount: 2,
-            createdAt: new Date()
-          },
-          {
-            _id: 'user-3',
-            name: 'Sarah Jenkins',
-            email: 'sarah@example.com',
-            role: 'user',
-            productCount: 0,
-            createdAt: new Date()
-          }
-        ]);
-      }
-    } catch (err) {
-      console.error('Error fetching users:', err);
-    }
-  };
-
-  const fetchProducts = async () => {
-    try {
-      let res = await fetch('/api/admin/listings', {
-        headers: { Authorization: `Bearer ${user?.token || ''}` }
-      });
-      let data = [];
-      if (res.ok) {
-        try {
-          const text = await res.text();
-          data = text ? JSON.parse(text) : [];
-        } catch (e) {}
-      }
-      
-      if (!Array.isArray(data) || data.length === 0) {
-        try {
-          const fbRes = await fetch('/api/listings');
-          if (fbRes.ok) {
-            const fbText = await fbRes.text();
-            data = fbText ? JSON.parse(fbText) : [];
-          }
-        } catch (e) {}
-      }
-
-      if (Array.isArray(data) && data.length > 0) {
-        setProductsList(data);
-      } else {
-        setProductsList([
-          {
-            _id: 'listing-1',
-            title: '1 BHK Apartment in Mulund',
-            name: '1 BHK Apartment in Mulund',
-            type: 'property',
-            category: 'Apartment',
-            location: 'Mulund, Mumbai',
-            price: 24000,
-            image: 'https://images.nobroker.in/images/8a9f934490b4cd9d0190b50627be14f9/8a9f934490b4cd9d0190b50627be14f9_96834_892988_medium.jpg',
-            host: { name: 'Admin User', email: 'admin@rentsphere.com', role: 'admin' }
-          },
-          {
-            _id: 'listing-2',
-            title: '2 BHK Flat in Andheri West',
-            name: '2 BHK Flat in Andheri West',
-            type: 'property',
-            category: 'Apartment',
-            location: 'Andheri West, Mumbai',
-            price: 38000,
-            image: 'https://is1-3.housingcdn.com/01c16c28/2d9380714fb183d24422949663c1231b/v0/medium/2_bhk_apartment-for-rent-andheri_west-Mumbai-hall.jpg',
-            host: { name: 'John Doe', email: 'john@example.com', role: 'user' }
-          },
-          {
-            _id: 'listing-3',
-            name: 'Honda City VX',
-            title: 'Honda City VX',
-            type: 'vehicle',
-            category: 'Sedan',
-            location: 'Chennai, Tamil Nadu',
-            price: 2499,
-            image: 'https://images.overdrive.in/wp-content/uploads/2017/09/Hyundai-Verna-vs-Honda-City-Comparo_-97.jpg',
-            host: { name: 'Admin User', email: 'admin@rentsphere.com', role: 'admin' }
-          },
-          {
-            _id: 'listing-4',
-            name: 'Hyundai Creta',
-            title: 'Hyundai Creta',
-            type: 'vehicle',
-            category: 'SUV',
-            location: 'Mumbai, Maharashtra',
-            price: 2799,
-            image: 'https://imgd.aeplcdn.com/640X480/vimages/202603/4428980_133865_4_1772958412062.jpg?qp=80&fit=true',
-            host: { name: 'John Doe', email: 'john@example.com', role: 'user' }
-          }
-        ]);
-      }
-    } catch (err) {
-      console.error('Error fetching products:', err);
-    }
-  };
-
-  // Step 5: Admin reviews the owner — fetch every owner onboarding application
-  const openOwnerDocument = async (event, ownerId, index) => {
-    event.preventDefault();
-    // Open immediately to preserve the existing new-tab behavior with popup blockers.
-    const preview = window.open('about:blank', '_blank');
-    if (preview) preview.opener = null;
-    try {
-      const res = await fetch(`/api/owner/documents/${encodeURIComponent(ownerId)}/${index}`, {
-        headers: { Authorization: `Bearer ${user.token}` }
-      });
-      if (!res.ok) throw new Error('Unable to open this document. Please try again.');
-      const url = URL.createObjectURL(await res.blob());
-      if (preview) preview.location.replace(url);
-      else {
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `owner-document-${index + 1}`;
-        link.click();
-      }
-      setTimeout(() => URL.revokeObjectURL(url), 60000);
-    } catch (error) {
-      preview?.close();
-      setErrorMsg(error.message);
-    }
-  };
-
-  const fetchOwners = async () => {
-    try {
-      const res = await fetch('/api/admin/owners', {
-        headers: { Authorization: `Bearer ${user?.token || ''}` }
-      });
-      let data = [];
-      if (res.ok) {
-        try {
-          const text = await res.text();
-          data = text ? JSON.parse(text) : [];
-        } catch (e) {}
-      }
-      setOwnersList(Array.isArray(data) ? data : []);
-    } catch (err) {
-      console.error('Error fetching owner applications:', err);
-    }
-  };
+  const fetchOwners = () => readAdmin('owners', setOwnersList);
 
   const loadAdminData = async () => {
     setLoading(true);
@@ -343,79 +179,6 @@ const confirmDelete = async () => {
     }
   };
 
-  // Handle Image Selection with Preview
-  const handleImageChange = (e) => {
-    const selectedFiles = Array.from(e.target.files);
-    if (!selectedFiles.length) return;
-
-    setFiles(prev => [...prev, ...selectedFiles]);
-    const newPreviews = selectedFiles.map(file => URL.createObjectURL(file));
-    setPreviews(prev => [...prev, ...newPreviews]);
-  };
-
-  const removeImage = (index) => {
-    setFiles(prev => prev.filter((_, i) => i !== index));
-    setPreviews(prev => prev.filter((_, i) => i !== index));
-  };
-
-  // Admin Submit New Product
-  const submitAdminProduct = async (e) => {
-    e.preventDefault();
-    setSubmittingProduct(true);
-    setFormSuccess('');
-    setFormError('');
-
-    try {
-      const formData = new FormData();
-      formData.append('type', productForm.type);
-      formData.append('name', productForm.name);
-      formData.append('title', productForm.name);
-      formData.append('category', productForm.category);
-      formData.append('location', productForm.location);
-      formData.append('price', productForm.price);
-      formData.append('description', productForm.description);
-
-      files.forEach(file => {
-        formData.append('images', file);
-      });
-
-      const res = await fetch('/api/listings', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${user.token}` },
-        body: formData
-      });
-
-      let resData = {};
-      try {
-        const text = await res.text();
-        resData = text ? JSON.parse(text) : {};
-      } catch (e) {}
-
-      if (!res.ok) {
-        throw new Error(resData.message || `Failed to create product (Status ${res.status})`);
-      }
-
-      setFormSuccess(`Successfully published "${resData.title || resData.name}"!`);
-      
-      setProductForm({
-        type: 'property',
-        name: '',
-        category: 'Apartment',
-        location: '',
-        price: '',
-        description: ''
-      });
-      setFiles([]);
-      setPreviews([]);
-
-      loadAdminData();
-    } catch (err) {
-      setFormError(err.message || 'Error creating product.');
-    } finally {
-      setSubmittingProduct(false);
-    }
-  };
-
   if (!user || user.role !== 'admin') {
     return (
       <div className="shell" style={{padding: '100px 0', textAlign: 'center'}}>
@@ -435,9 +198,7 @@ const confirmDelete = async () => {
     );
   }
 
-  const categoryOptions = productForm.type === 'property' 
-    ? ['Apartment', 'House', 'Villa', 'Studio'] 
-    : ['Car', 'Bike', 'SUV', 'Sedan', 'Scooter', 'Electric'];
+  const visibleProducts = filterAdminProducts(productsList, productType, productSearch);
 
   return (
     <div className="shell" style={{padding: '40px 0 80px'}}>
@@ -465,7 +226,7 @@ const confirmDelete = async () => {
       <div style={{ display: 'grid', gridTemplateColumns: 'minmax(200px, 240px) 1fr', gap: '30px', alignItems: 'start' }} className="admin-grid">
         
         {/* Sidebar Navigation */}
-        <aside style={{ background: '#fff', padding: '20px', borderRadius: '15px', border: '1px solid var(--line)', boxShadow: '0 2px 8px rgba(0,0,0,0.03)' }}>
+        <aside className="admin-navigation-sidebar" style={{ background: '#fff', padding: '20px', borderRadius: '15px', border: '1px solid var(--line)', boxShadow: '0 2px 8px rgba(0,0,0,0.03)' }}>
           <div className="admin-nav-header" style={{fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--muted)', textTransform: 'uppercase', marginBottom: '15px', paddingLeft: '8px'}}>
             Navigation
           </div>
@@ -509,6 +270,12 @@ const confirmDelete = async () => {
               </span>
             </button>
 
+            {[['vehicle_bookings', 'Vehicle Bookings'], ['property_visits', 'Property Visits']].map(([tab, label]) => <button key={tab}
+              onClick={() => setActiveTab(tab)} aria-current={activeTab === tab ? 'page' : undefined}
+              style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%', padding: '12px 15px', borderRadius: '10px', textAlign: 'left', fontWeight: 'bold', border: 'none', cursor: 'pointer', background: activeTab === tab ? 'var(--blue)' : 'transparent', color: activeTab === tab ? '#fff' : 'var(--charcoal)' }}>
+              <span className="admin-request-nav-icon" aria-hidden="true">{tab === 'vehicle_bookings' ? '🚘' : '🏡'}</span>{label}
+            </button>)}
+
             <button 
               onClick={() => setActiveTab('add_product')}
               style={{
@@ -538,6 +305,8 @@ const confirmDelete = async () => {
 
         {/* Main Content Area */}
         <main style={{ minWidth: 0 }}>
+          {activeTab === 'vehicle_bookings' && <AdminRequests key="vehicle" type="vehicle" />}
+          {activeTab === 'property_visits' && <AdminRequests key="property_visit" type="property_visit" />}
           
           {/* SECTION 1: DASHBOARD OVERVIEW */}
           {activeTab === 'overview' && (
@@ -546,28 +315,28 @@ const confirmDelete = async () => {
                 <div className="admin-stat-card" style={{ padding: '20px', background: '#fff', border: '1px solid var(--line)', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                   <span style={{fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 'bold', textTransform: 'uppercase'}}>Total Users</span>
                   <p style={{fontSize: '2.2rem', fontWeight: 'bold', margin: '4px 0 0', color: 'var(--charcoal)'}}>
-                    {stats?.totalUsers !== undefined ? stats.totalUsers : (usersList.length || 0)}
+                    {stats?.totalUsers ?? '—'}
                   </p>
                 </div>
                 
                 <div className="admin-stat-card" style={{ padding: '20px', background: '#fff', border: '1px solid var(--line)', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                   <span style={{fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 'bold', textTransform: 'uppercase'}}>Total Products</span>
                   <p style={{fontSize: '2.2rem', fontWeight: 'bold', margin: '4px 0 0', color: 'var(--blue)'}}>
-                    {stats?.totalProducts !== undefined ? stats.totalProducts : (productsList.length || 0)}
+                    {stats?.totalProducts ?? '—'}
                   </p>
                 </div>
 
                 <div className="admin-stat-card" style={{ padding: '20px', background: '#fff', border: '1px solid var(--line)', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                   <span style={{fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 'bold', textTransform: 'uppercase'}}>Categories</span>
                   <p style={{fontSize: '2.2rem', fontWeight: 'bold', margin: '4px 0 0', color: '#d97706'}}>
-                    {stats?.totalCategories || 6}
+                    {stats?.totalCategories ?? '—'}
                   </p>
                 </div>
 
                 <div className="admin-stat-card" style={{ padding: '20px', background: '#fff', border: '1px solid var(--line)', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                   <span style={{fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 'bold', textTransform: 'uppercase'}}>User Uploads</span>
                   <p style={{fontSize: '2.2rem', fontWeight: 'bold', margin: '4px 0 0', color: 'var(--green)'}}>
-                    {stats?.userUploadedProductsCount !== undefined ? stats.userUploadedProductsCount : (productsList.length || 0)}
+                    {stats?.userUploadedProductsCount ?? '—'}
                   </p>
                 </div>
               </div>
@@ -667,8 +436,8 @@ const confirmDelete = async () => {
               {/* Quick Tab Bar inside Products section */}
               <div style={{display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap'}}>
                 <button 
-                  onClick={() => setActiveTab('products')}
-                  style={{padding: '8px 16px', borderRadius: '8px', border: '1px solid var(--line)', background: activeTab === 'products' ? 'var(--charcoal)' : '#fff', color: activeTab === 'products' ? '#fff' : 'var(--charcoal)', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.85rem'}}
+                  onClick={() => { setProductType('all'); setActiveTab('products'); }}
+                  className={`admin-product-tab${activeTab === 'products' ? ' is-active' : ''}`}
                 >
                   All Products ({productsList.length})
                 </button>
@@ -686,13 +455,14 @@ const confirmDelete = async () => {
                   <h2>Products Management ({productsList.length})</h2>
                   <p style={{color: 'var(--muted)', fontSize: '0.9rem', marginBottom: '20px'}}>View, inspect, or delete products published across RentSphere.</p>
 
-                  {productsList.length === 0 ? (
+                  <AdminProductFilters products={productsList} type={productType} search={productSearch} onTypeChange={setProductType} onSearchChange={setProductSearch} />
+                  {visibleProducts.length === 0 ? (
                     <div style={{padding: '40px 0', textAlign: 'center', color: 'var(--muted)'}}>
-                      <p>No products found in the database.</p>
+                      <p>No matching products found</p>
                     </div>
                   ) : (
                     <div className="admin-products-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '20px'}}>
-                      {productsList.map(p => (
+                      {visibleProducts.map(p => (
                         <div key={p._id} style={{border: '1px solid var(--line)', borderRadius: '12px', overflow: 'hidden', background: '#fff', display: 'flex', flexDirection: 'column'}}>
                           <div style={{position: 'relative', height: '160px'}}>
                             <img 
@@ -708,6 +478,7 @@ const confirmDelete = async () => {
                           <div style={{padding: '14px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
                             <div>
                               <h4 style={{margin: '0 0 6px 0', fontSize: '1rem'}}>{p.title || p.name}</h4>
+                              <ListingControls item={p} onChanged={loadAdminData} />
                               <div style={{fontSize: '0.82rem', margin: '6px 0 10px 0', lineHeight: '1.6', color: 'var(--charcoal)'}}>
                                 <div><strong>Category:</strong> {p.category || p.type}</div>
                                 <div><strong>User Name:</strong> {p.host?.name || 'Admin User'}</div>
@@ -715,7 +486,8 @@ const confirmDelete = async () => {
                               </div>
                             </div>
 
-                            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--line)', paddingTop: '10px', marginTop: '10px'}}>
+                            <div className="admin-product-card-actions" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--line)', paddingTop: '10px', marginTop: '10px'}}>
+                              <Link className="admin-product-view" to={adminListingPath(p)} target="_blank" rel="noopener noreferrer" aria-label={`View ${p.title || p.name} listing (opens in a new tab)`}>View Listing</Link>
                               <strong style={{fontSize: '0.95rem'}}>₹{formatPrice(p.price)}</strong>
                               <button 
                                 onClick={() => handleDeleteProduct(p._id, p.title || p.name)}
@@ -738,111 +510,12 @@ const confirmDelete = async () => {
                   <h2>Add New Rental Product</h2>
                   <p style={{color: 'var(--muted)', fontSize: '0.9rem', marginBottom: '20px'}}>Create and publish a new property or vehicle listing as Admin.</p>
 
-                  <form onSubmit={submitAdminProduct}>
-                    <div style={{display: 'flex', gap: '15px', marginBottom: '15px', flexWrap: 'wrap'}}>
-                      <label style={{flex: 1, minWidth: '200px', fontWeight: 'bold'}}>
-                        Type
-                        <select 
-                          style={{width: '100%', padding: '10px', marginTop: '5px', borderRadius: '8px', border: '1px solid var(--line)', background: '#fff'}}
-                          value={productForm.type} 
-                          onChange={e => setProductForm({ ...productForm, type: e.target.value, category: e.target.value === 'property' ? 'Apartment' : 'Car' })}
-                        >
-                          <option value="property">Property / Room</option>
-                          <option value="vehicle">Vehicle / Ride</option>
-                        </select>
-                      </label>
-
-                      <label style={{flex: 1, minWidth: '200px', fontWeight: 'bold'}}>
-                        Category
-                        <select 
-                          style={{width: '100%', padding: '10px', marginTop: '5px', borderRadius: '8px', border: '1px solid var(--line)', background: '#fff'}}
-                          value={productForm.category} 
-                          onChange={e => setProductForm({ ...productForm, category: e.target.value })}
-                        >
-                          {categoryOptions.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-                        </select>
-                      </label>
-                    </div>
-
-                    <label style={{display: 'block', marginBottom: '15px', fontWeight: 'bold'}}>
-                      Product Name / Title
-                      <input 
-                        required
-                        style={{width: '100%', padding: '10px', marginTop: '5px', borderRadius: '8px', border: '1px solid var(--line)'}}
-                        placeholder="e.g. 2 BHK Premium Flat or Hyundai Creta"
-                        value={productForm.name} 
-                        onChange={e => setProductForm({ ...productForm, name: e.target.value })}
-                      />
-                    </label>
-
-                    <div style={{display: 'flex', gap: '15px', marginBottom: '15px', flexWrap: 'wrap'}}>
-                      <label style={{flex: 1, minWidth: '200px', fontWeight: 'bold'}}>
-                        Location
-                        <input 
-                          required
-                          style={{width: '100%', padding: '10px', marginTop: '5px', borderRadius: '8px', border: '1px solid var(--line)'}}
-                          placeholder="City / Area"
-                          value={productForm.location} 
-                          onChange={e => setProductForm({ ...productForm, location: e.target.value })}
-                        />
-                      </label>
-                      <label style={{flex: 1, minWidth: '200px', fontWeight: 'bold'}}>
-                        Price (₹)
-                        <input 
-                          required type="number" min="1"
-                          style={{width: '100%', padding: '10px', marginTop: '5px', borderRadius: '8px', border: '1px solid var(--line)'}}
-                          placeholder="Rate"
-                          value={productForm.price} 
-                          onChange={e => setProductForm({ ...productForm, price: e.target.value })}
-                        />
-                      </label>
-                    </div>
-
-                    <label style={{display: 'block', marginBottom: '15px', fontWeight: 'bold'}}>
-                      Description
-                      <textarea 
-                        required rows="3"
-                        style={{width: '100%', padding: '10px', marginTop: '5px', borderRadius: '8px', border: '1px solid var(--line)', resize: 'vertical'}}
-                        placeholder="Detailed description of amenities or condition..."
-                        value={productForm.description} 
-                        onChange={e => setProductForm({ ...productForm, description: e.target.value })}
-                      />
-                    </label>
-
-                    <div style={{marginBottom: '20px'}}>
-                      <label style={{display: 'block', fontWeight: 'bold', marginBottom: '5px'}}>
-                        Upload Images (Multiple)
-                      </label>
-                      <input 
-                        type="file" accept="image/*" multiple 
-                        onChange={handleImageChange}
-                        style={{width: '100%', padding: '8px', border: '1px dashed var(--line)', borderRadius: '8px', background: '#fafafa', cursor: 'pointer'}}
-                      />
-
-                      {previews.length > 0 && (
-                        <div style={{marginTop: '12px', display: 'flex', gap: '8px', flexWrap: 'wrap'}}>
-                          {previews.map((src, i) => (
-                            <div key={i} style={{position: 'relative', width: '60px', height: '60px', borderRadius: '6px', overflow: 'hidden', border: '1px solid var(--line)'}}>
-                              <img src={src} alt="" style={{width: '100%', height: '100%', objectFit: 'cover'}} />
-                              <button 
-                                type="button" onClick={() => removeImage(i)}
-                                style={{position: 'absolute', top: '2px', right: '2px', background: 'rgba(0,0,0,0.7)', color: '#fff', border: 'none', borderRadius: '50%', width: '16px', height: '16px', fontSize: '9px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center'}}
-                              >
-                                ✕
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    {formError && <p style={{color: 'red', fontWeight: 'bold', marginBottom: '15px'}}>{formError}</p>}
-                    {formSuccess && <p style={{color: 'var(--green)', fontWeight: 'bold', marginBottom: '15px'}}>✓ {formSuccess}</p>}
-
-                    <button className="btn btn-primary" disabled={submittingProduct} style={{width: '100%', justifyContent: 'center'}}>
-                      {submittingProduct ? 'Publishing...' : 'Publish Product →'}
-                    </button>
-                  </form>
+                  <HostingForm token={user.token} onSaved={async listing => {
+                    setProductsList(previous => [listing, ...previous.filter(product => product._id !== listing._id)]);
+                    setProductType(listing.type); setProductSearch(''); setActiveTab('products');
+                    setActionMessage('Product published successfully.');
+                    await Promise.all([fetchProducts(), fetchStats()]);
+                  }} />
                 </div>
               )}
 
@@ -866,6 +539,7 @@ const confirmDelete = async () => {
                     const statusStyle = {
                       approved: { bg: '#e0f7ec', color: 'var(--green)', label: 'APPROVED' },
                       pending: { bg: '#fff8e6', color: '#a15c00', label: 'PENDING REVIEW' },
+                      revoked: { bg: '#fff5f5', color: '#c53030', label: 'REVOKED' },
                       rejected: { bg: '#fff5f5', color: '#c53030', label: 'REJECTED' },
                       in_progress: { bg: '#eef2ff', color: 'var(--blue)', label: 'IN PROGRESS' }
                     }[p.status] || { bg: '#f3f4f6', color: 'var(--charcoal)', label: (p.status || 'UNKNOWN').toUpperCase() };
@@ -882,6 +556,7 @@ const confirmDelete = async () => {
                             </div>
                             <div style={{fontSize: '0.85rem', color: 'var(--muted)'}}>{o.email} {p.phone ? `· ${p.phone}` : ''}</div>
                           </div>
+                          {p.status === 'approved' && o.role !== 'admin' && <button className="save-button" onClick={() => { setRevokeError(''); setRevoke({ _id: o._id, token: user.token }); }}>Revoke Owner Access</button>}
                           {p.status === 'pending' && (
                             <div style={{display: 'flex', gap: '8px'}}>
                               <button
@@ -954,6 +629,7 @@ const confirmDelete = async () => {
         </main>
       </div>
 
+      {revoke && <HistoryConfirmation removing titleText="Revoke Owner Access?" descriptionText="This owner will lose permission to host or manage rental listings. Existing records will be preserved." confirmText="Revoke Access" busy={revoking} error={revokeError} onClose={closeRevoke} onConfirm={revokeOwner} />}
       {deleteModal && (
   <div className="delete-modal-overlay">
     <div className="delete-modal">

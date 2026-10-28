@@ -1,0 +1,304 @@
+{
+  "approved": false,
+  "manifestSha256": null,
+  "targetDatabase": null,
+  "assignments": {
+    "P01": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P02": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P03": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P04": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P05": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P06": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P07": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P08": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P09": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P10": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P11": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P12": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P13": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P14": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P15": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P16": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P17": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P18": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P19": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P20": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P21": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P22": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P23": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P24": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P25": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P26": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P27": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P28": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P29": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P30": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P31": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P32": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P33": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P34": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P35": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "P36": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M01": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M02": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M03": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M04": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M05": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M06": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M07": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M08": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M09": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M10": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M11": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M12": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M13": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M14": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M15": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M16": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M17": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M18": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M19": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M20": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M21": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M22": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M23": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M24": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M25": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M26": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M27": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M28": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M29": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M30": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M31": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M32": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M33": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M34": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M35": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M36": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M37": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    },
+    "M38": {
+      "host": "6ad4aa8b98166bf0d4230f0c",
+      "approved": false
+    }
+  },
+  "note": "Proposed assignments only. Human approval and completed media are required before apply."
+}

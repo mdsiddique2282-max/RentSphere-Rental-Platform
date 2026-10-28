@@ -1,11 +1,14 @@
 import express from 'express';
+import { removeListing } from '../utils/listingHistory.js';
 import User from '../models/User.js';
 import Listing from '../models/Listing.js';
 import Booking from '../models/Booking.js';
-import { verifyToken } from '../utils/tokens.js';
+import { verifyToken, sessionIsCurrent } from '../utils/tokens.js';
 import mongoose from 'mongoose';
 import { deleteListingFiles } from './listings.js';
-import { listOwnerApps, upsertOwnerApp } from '../utils/ownerStore.js';
+import { upsertOwnerApp } from '../utils/ownerStore.js';
+import { confirmVehicleBooking, rejectVehicleBooking } from '../utils/vehicleBookings.js';
+import { decidePropertyVisit } from '../utils/propertyVisits.js';
 
 const router = express.Router();
 
@@ -38,7 +41,7 @@ const adminProtect = async (req, res, next) => {
 
   try {
     const user = await User.findById(decoded.id).select('-password').maxTimeMS(5000);
-    if (!user) {
+    if (!user || !sessionIsCurrent(decoded, user)) {
       return res.status(401).json({ message: 'Not authorized, user no longer exists.' });
     }
     if (user.role !== 'admin') {
@@ -52,193 +55,120 @@ const adminProtect = async (req, res, next) => {
   }
 };
 
-// Seed initial database listings if collection is completely empty
-const ensureInitialListings = async () => {
+const activeListings = { archivedAt: { $exists: false } };
+
+// Both management sections use the original bookings collection, including
+// archived listings, hidden history and predefined inventory without an owner.
+router.get('/requests', adminProtect, async (req, res) => {
+  const kind = req.query.type;
+  if (!['vehicle', 'property_visit'].includes(kind)) return res.status(400).json({ message: 'Choose vehicle bookings or property visits.' });
+  if (req.query.archived !== undefined && !['true', 'false'].includes(req.query.archived)) return res.status(400).json({ message: 'Choose active or archived requests.' });
   try {
-    const count = await Listing.countDocuments();
-    if (count === 0) {
-      // Never create accounts here. Seed demo listings only if a real admin already exists.
-      const adminUser = await User.findOne({ role: 'admin' });
-      if (!adminUser) return;
-      const sampleUser = adminUser;
+    const filter = kind === 'vehicle' ? { $or: [{ requestType: 'vehicle' }, { requestType: { $exists: false } }] } : { requestType: 'property_visit' };
+    const rows = await Booking.find({ ...filter, adminHidden: { $ne: true }, hiddenFromAdmin: req.query.archived === 'true' ? true : { $ne: true } })
+      .select('requestId requestType listing user contact startDate endDate totalPrice fulfilment deliveryAddress deliveryCoordinates deliveryCharge deliveryQuote vehicleSnapshot status createdAt updatedAt propertyDecision hiddenFromAdmin')
+      .populate({ path: 'listing', select: 'title name type category kind image gallery location price phone owner host hostingDetailsVersion available availability status interestUnavailable',
+        populate: { path: 'host', select: 'name email' } })
+      .populate('user', 'name email').sort({ createdAt: -1, _id: -1 }).lean();
+    res.json(rows.filter(row => kind !== 'vehicle' || row.requestType === 'vehicle' || row.listing?.type === 'vehicle'));
+  } catch { res.status(503).json({ message: 'Unable to load requests. Please try again.' }); }
+});
 
-      const initialListings = [
-        {
-          title: '1 BHK Apartment in Mulund',
-          name: '1 BHK Apartment in Mulund',
-          type: 'property',
-          category: 'Apartment',
-          location: 'Mulund, Mumbai',
-          price: 24000,
-          description: 'A well-maintained furnished home with excellent natural light.',
-          image: 'https://images.nobroker.in/images/8a9f934490b4cd9d0190b50627be14f9/8a9f934490b4cd9d0190b50627be14f9_96834_892988_medium.jpg',
-          gallery: ['https://images.nobroker.in/images/8a9f934490b4cd9d0190b50627be14f9/8a9f934490b4cd9d0190b50627be14f9_96834_892988_medium.jpg'],
-          amenities: ['Parking', 'Lift', 'Security'],
-          host: adminUser._id
-        },
-        {
-          title: '2 BHK Flat in Andheri West',
-          name: '2 BHK Flat in Andheri West',
-          type: 'property',
-          category: 'Apartment',
-          location: 'Andheri West, Mumbai',
-          price: 38000,
-          description: 'Spacious two-bedroom residence near Andheri Metro.',
-          image: 'https://is1-3.housingcdn.com/01c16c28/2d9380714fb183d24422949663c1231b/v0/medium/2_bhk_apartment-for-rent-andheri_west-Mumbai-hall.jpg',
-          gallery: ['https://is1-3.housingcdn.com/01c16c28/2d9380714fb183d24422949663c1231b/v0/medium/2_bhk_apartment-for-rent-andheri_west-Mumbai-hall.jpg'],
-          amenities: ['Balcony', 'WiFi'],
-          host: sampleUser._id
-        },
-        {
-          name: 'Honda City VX',
-          title: 'Honda City VX',
-          type: 'vehicle',
-          category: 'Sedan',
-          location: 'Chennai, Tamil Nadu',
-          price: 2499,
-          description: 'Smooth ride for the city.',
-          image: 'https://images.overdrive.in/wp-content/uploads/2017/09/Hyundai-Verna-vs-Honda-City-Comparo_-97.jpg',
-          gallery: ['https://images.overdrive.in/wp-content/uploads/2017/09/Hyundai-Verna-vs-Honda-City-Comparo_-97.jpg'],
-          features: ['AC', 'Bluetooth'],
-          host: adminUser._id
-        },
-        {
-          name: 'Hyundai Creta',
-          title: 'Hyundai Creta',
-          type: 'vehicle',
-          category: 'SUV',
-          location: 'Mumbai, Maharashtra',
-          price: 2799,
-          description: 'Popular automatic SUV.',
-          image: 'https://imgd.aeplcdn.com/640X480/vimages/202603/4428980_133865_4_1772958412062.jpg?qp=80&fit=true',
-          gallery: ['https://imgd.aeplcdn.com/640X480/vimages/202603/4428980_133865_4_1772958412062.jpg?qp=80&fit=true'],
-          features: ['Automatic', 'GPS'],
-          host: sampleUser._id
-        }
-      ];
+// Capture the complete section, independently of frontend filters/pagination.
+router.get('/requests/archived-set', adminProtect, async (req, res) => {
+  const kind = req.query.type;
+  if (!['vehicle', 'property_visit'].includes(kind)) return res.status(400).json({ message: 'Choose vehicle bookings or property visits.' });
+  try {
+    const filter = kind === 'vehicle' ? { $or: [{ requestType: 'vehicle' }, { requestType: { $exists: false } }] } : { requestType: 'property_visit' };
+    const rows = await Booking.find({ ...filter, hiddenFromAdmin: true, adminHidden: { $ne: true } })
+      .select('_id requestType listing').populate('listing', 'type').lean();
+    const ids = rows.filter(row => kind !== 'vehicle' || row.requestType === 'vehicle' || row.listing?.type === 'vehicle').map(row => String(row._id));
+    res.json({ type: kind, ids, count: ids.length });
+  } catch { res.status(503).json({ message: 'Unable to prepare archived requests. Please retry.' }); }
+});
 
-      await Listing.insertMany(initialListings);
-    }
-  } catch (err) {
-    console.warn('Ensure initial listings warning:', err.message);
+// Bounded batches keep payloads small; each transaction rechecks archive/type state.
+router.put('/requests/hide-archived', adminProtect, async (req, res) => {
+  const { type, ids } = req.body || {};
+  if (!['vehicle', 'property_visit'].includes(type) || !Array.isArray(ids) || !ids.length || ids.length > 200 ||
+      ids.some(id => typeof id !== 'string' || !/^[a-f\d]{24}$/i.test(id)) || new Set(ids.map(id => id.toLowerCase())).size !== ids.length || Object.keys(req.body).some(key => !['type', 'ids'].includes(key))) {
+    return res.status(400).json({ message: 'Provide a request type and 1–200 unique valid archived request IDs per batch.' });
   }
-};
-
-// GET /api/admin/stats - Overview statistics directly from database
-router.get('/stats', adminProtect, async (req, res) => {
   try {
-    await ensureInitialListings();
-
-    const dbUsersCount = await User.countDocuments();
-    const totalProducts = await Listing.countDocuments();
-    const totalVehicles = await Listing.countDocuments({ type: 'vehicle' });
-    const totalRooms = await Listing.countDocuments({ type: 'property' });
-    const totalBookings = await Booking.countDocuments();
-    
-    const categoriesList = await Listing.distinct('category');
-    const kindsList = await Listing.distinct('kind');
-    const uniqueCategories = Array.from(new Set([...categoriesList, ...kindsList].filter(Boolean))).length;
-
-    const recentProducts = await Listing.find({})
-      .populate('host', 'name email role')
-      .sort({ createdAt: -1 })
-      .limit(5);
-
-    const userUploadedProductsCount = await Listing.countDocuments({ host: { $ne: null } });
-
-    res.json({
-      totalUsers: Math.max(dbUsersCount || 0, 3),
-      totalProducts: totalProducts || 4,
-      totalVehicles: totalVehicles || 2,
-      totalRooms: totalRooms || 2,
-      totalBookings: totalBookings || 0,
-      totalCategories: uniqueCategories || 6,
-      recentProducts: recentProducts || [],
-      userUploadedProductsCount: userUploadedProductsCount || 4
+    const result = await mongoose.connection.transaction(async session => {
+      const filter = type === 'vehicle' ? { $or: [{ requestType: 'vehicle' }, { requestType: { $exists: false } }] } : { requestType: 'property_visit' };
+      const rows = await Booking.find({ ...filter, _id: { $in: ids }, hiddenFromAdmin: true, adminHidden: { $ne: true } })
+        .select('_id requestType listing').session(session).populate('listing', 'type').lean();
+      const eligible = rows.filter(row => type !== 'vehicle' || row.requestType === 'vehicle' || row.listing?.type === 'vehicle');
+      const succeeded = eligible.map(row => String(row._id));
+      if (eligible.length) await Booking.collection.updateMany({ _id: { $in: eligible.map(row => row._id) }, hiddenFromAdmin: true, adminHidden: { $ne: true } },
+        { $set: { adminHidden: true } }, { session }); // Native update preserves every history timestamp.
+      const changed = new Set(succeeded);
+      return { succeeded, failed: ids.filter(id => !changed.has(id.toLowerCase())).map(id => ({ id, message: 'Request is no longer archived in this section, is already hidden, or was not found.' })) };
     });
+    res.json(result);
+  } catch { res.status(503).json({ message: 'Unable to hide archived requests. Refresh and retry; no batch success was confirmed.' }); }
+});
+
+router.put('/requests/:id/archive', adminProtect, async (req, res) => {
+  if (!/^[a-f\d]{24}$/i.test(req.params.id)) return res.status(404).json({ message: 'Request not found.' });
+  if (typeof req.body?.archived !== 'boolean' || Object.keys(req.body).length !== 1) return res.status(400).json({ message: 'Provide an archived boolean.' });
+  try {
+    const row = await Booking.findOne({ _id: req.params.id, adminHidden: { $ne: true } }).select('status requestType listing');
+    if (!row) return res.status(404).json({ message: 'Request not found.' });
+    if (!['vehicle', 'property_visit'].includes(row.requestType)) {
+      const listing = await Listing.findById(row.listing).select('type');
+      if (row.requestType !== undefined || listing?.type !== 'vehicle') return res.status(400).json({ message: 'Only vehicle bookings and property visits can be archived here.' });
+    }
+    if (req.body.archived && !Booking.schema.path('status').enumValues.includes(row.status)) return res.status(409).json({ message: 'Requests with an invalid status cannot be archived.' });
+    // Native update deliberately bypasses Mongoose timestamps. This flag must
+    // never change booking history, date blocking, interest or notifications.
+    const changed = await Booking.collection.updateOne({ _id: row._id, adminHidden: { $ne: true }, ...(req.body.archived ? { status: row.status } : {}) }, { $set: { hiddenFromAdmin: req.body.archived } });
+    if (!changed.matchedCount) return res.status(409).json({ message: 'Request changed. Please refresh and retry.' });
+    res.json({ _id: String(row._id), archived: req.body.archived });
+  } catch { res.status(503).json({ message: 'Unable to archive or restore the request. Please retry.' }); }
+});
+
+router.put('/requests/:id/:action', adminProtect, async (req, res) => {
+  if (!/^[a-f\d]{24}$/i.test(req.params.id)) return res.status(404).json({ message: 'Request not found.' });
+  if (!['confirm', 'reject'].includes(req.params.action)) return res.status(400).json({ message: 'Choose Accept or Reject.' });
+  try {
+    const row = await Booking.findById(req.params.id);
+    if (!row) return res.status(404).json({ message: 'Request not found.' });
+    const listing = await Listing.findById(row.listing).select('type');
+    const visit = row.requestType === 'property_visit';
+    if (!visit && (listing?.type !== 'vehicle' || ![undefined, 'vehicle'].includes(row.requestType))) {
+      return res.status(400).json({ message: 'Only vehicle bookings and property visits can be managed here.' });
+    }
+    const status = req.params.action === 'confirm' ? 'confirmed' : 'rejected';
+    const result = visit ? await decidePropertyVisit(row._id, req.user, status, { requirePending: true })
+      : status === 'confirmed' ? await confirmVehicleBooking(row._id, req.user, { requirePending: true })
+      : await rejectVehicleBooking(row._id, req.user);
+    res.json(result);
   } catch (error) {
-    console.error('Error fetching admin stats:', error.message);
-    res.json({
-      totalUsers: 3,
-      totalProducts: 4,
-      totalVehicles: 2,
-      totalRooms: 2,
-      totalBookings: 0,
-      totalCategories: 6,
-      recentProducts: [],
-      userUploadedProductsCount: 4
-    });
+    res.status(error.status || 503).json({ message: error.status ? error.message : 'Unable to save this decision. Please retry.' });
   }
 });
 
-// GET /api/admin/users - Fetch ALL registered users from database with upload counts
+router.get('/stats', adminProtect, async (req, res) => {
+  try {
+    const [totalUsers, totalProducts, totalVehicles, totalRooms, totalBookings, categories, kinds, recentProducts, userUploadedProductsCount] = await Promise.all([
+      User.countDocuments(), Listing.countDocuments(activeListings), Listing.countDocuments({ ...activeListings, type: 'vehicle' }),
+      Listing.countDocuments({ ...activeListings, type: 'property' }), Booking.countDocuments(),
+      Listing.distinct('category', activeListings), Listing.distinct('kind', activeListings),
+      Listing.find(activeListings).populate('host', 'name email role').sort({ createdAt: -1 }).limit(5),
+      Listing.countDocuments({ ...activeListings, host: { $ne: null } })
+    ]);
+    res.json({ totalUsers, totalProducts, totalVehicles, totalRooms, totalBookings,
+      totalCategories: new Set([...categories, ...kinds].filter(Boolean)).size, recentProducts, userUploadedProductsCount });
+  } catch { res.status(503).json({ message: 'Unable to load database statistics.' }); }
+});
 router.get('/users', adminProtect, async (req, res) => {
   try {
-    await ensureInitialListings();
-    let users = await User.find({}).select('-password').sort({ createdAt: -1 });
-
-    let usersList = users.map(u => u.toObject());
-
-    // Ensure current req.user is included if not in list
-    if (req.user && req.user._id) {
-      const exists = usersList.some(u => u._id.toString() === req.user._id.toString() || u.email === req.user.email);
-      if (!exists) {
-        usersList.unshift({
-          _id: req.user._id,
-          name: req.user.name || 'Admin User',
-          email: req.user.email || 'admin@rentsphere.com',
-          role: req.user.role || 'admin',
-          createdAt: new Date()
-        });
-      }
-    }
-
-    const usersWithCounts = await Promise.all(
-      usersList.map(async (u) => {
-        let productCount = 0;
-        try {
-          if (u._id) {
-            productCount = await Listing.countDocuments({
-              $or: [{ host: u._id }, { host: u._id.toString() }]
-            });
-          }
-        } catch (e) {
-          console.warn('Error counting user listings:', e.message);
-        }
-        return { ...u, productCount };
-      })
-    );
-    
-    res.json(usersWithCounts);
-  } catch (error) {
-    console.error('Error fetching users in admin:', error.message);
-    res.json([
-      {
-        _id: req.user?._id || 'admin-1',
-        name: req.user?.name || 'Admin User',
-        email: req.user?.email || 'admin@rentsphere.com',
-        role: 'admin',
-        productCount: 2,
-        createdAt: new Date()
-      },
-      {
-        _id: 'user-2',
-        name: 'John Doe',
-        email: 'john@example.com',
-        role: 'user',
-        productCount: 2,
-        createdAt: new Date()
-      },
-      {
-        _id: 'user-3',
-        name: 'Sarah Jenkins',
-        email: 'sarah@example.com',
-        role: 'user',
-        productCount: 0,
-        createdAt: new Date()
-      }
-    ]);
-  }
+    const users = await User.find({}).select('-password').sort({ createdAt: -1 });
+    res.json(await Promise.all(users.map(async user => ({ ...user.toObject(),
+      productCount: await Listing.countDocuments({ ...activeListings, host: user._id }) }))));
+  } catch { res.status(503).json({ message: 'Unable to load users.' }); }
 });
 
 // DELETE /api/admin/users/:id - Cascade delete user and all uploaded products & images
@@ -252,140 +182,31 @@ router.delete('/users/:id', adminProtect, async (req, res) => {
       return res.status(400).json({ message: 'Admin cannot delete their own account from admin panel' });
     }
 
-    let userListings = [];
-    try {
-      userListings = await Listing.find({
-        $or: [{ host: userId }, { host: new mongoose.Types.ObjectId(userId) }]
-      });
-    } catch (e) {
-      userListings = await Listing.find({ host: userId });
-    }
-    
-    for (const listing of userListings) {
-      deleteListingFiles(listing);
-    }
-
-    try {
-      await Listing.deleteMany({
-        $or: [{ host: userId }, { host: new mongoose.Types.ObjectId(userId) }]
-      });
-    } catch (e) {
-      await Listing.deleteMany({ host: userId });
-    }
-    await Booking.deleteMany({ user: userId });
-    await User.findByIdAndDelete(userId);
+    const userListings = await mongoose.connection.transaction(async session => {
+      // Shared listing locks prevent a racing request from losing its reference.
+      await Listing.updateMany({ host: userId }, { $inc: { bookingRevision: 1 } }, { session });
+      const listings = await Listing.find({ host: userId }).session(session);
+      if (await Booking.exists({ $or: [{ user: userId }, { listing: { $in: listings.map(row => row._id) } }] }).session(session)) {
+        throw Object.assign(new Error('This account has booking history and cannot be deleted.'), { status: 409 });
+      }
+      if (await User.exists({ savedListings: { $in: listings.map(row => row._id) } }).session(session)) {
+        throw Object.assign(new Error('This account has saved-listing references and cannot be deleted.'), { status: 409 });
+      }
+      await Listing.deleteMany({ host: userId }, { session });
+      await User.findByIdAndDelete(userId, { session });
+      return listings;
+    });
+    for (const listing of userListings) await deleteListingFiles(listing);
 
     res.json({ message: `User ${userDoc.name} and all associated products were deleted successfully.` });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(error.status || 503).json({ message: error.status ? error.message : 'Unable to delete user safely.' });
   }
 });
 
-// GET /api/admin/listings - Manage all products uploaded by ALL users
 router.get('/listings', adminProtect, async (req, res) => {
-  try {
-    await ensureInitialListings();
-    let listings = await Listing.find({}).populate('host', 'name email role').sort({ createdAt: -1 });
-
-    if (!listings || listings.length === 0) {
-      listings = [
-        {
-          _id: 'listing-1',
-          title: '1 BHK Apartment in Mulund',
-          name: '1 BHK Apartment in Mulund',
-          type: 'property',
-          category: 'Apartment',
-          location: 'Mulund, Mumbai',
-          price: 24000,
-          image: 'https://images.nobroker.in/images/8a9f934490b4cd9d0190b50627be14f9/8a9f934490b4cd9d0190b50627be14f9_96834_892988_medium.jpg',
-          host: { name: 'Admin User', email: 'admin@rentsphere.com', role: 'admin' }
-        },
-        {
-          _id: 'listing-2',
-          title: '2 BHK Flat in Andheri West',
-          name: '2 BHK Flat in Andheri West',
-          type: 'property',
-          category: 'Apartment',
-          location: 'Andheri West, Mumbai',
-          price: 38000,
-          image: 'https://is1-3.housingcdn.com/01c16c28/2d9380714fb183d24422949663c1231b/v0/medium/2_bhk_apartment-for-rent-andheri_west-Mumbai-hall.jpg',
-          host: { name: 'John Doe', email: 'john@example.com', role: 'user' }
-        },
-        {
-          _id: 'listing-3',
-          name: 'Honda City VX',
-          title: 'Honda City VX',
-          type: 'vehicle',
-          category: 'Sedan',
-          location: 'Chennai, Tamil Nadu',
-          price: 2499,
-          image: 'https://images.overdrive.in/wp-content/uploads/2017/09/Hyundai-Verna-vs-Honda-City-Comparo_-97.jpg',
-          host: { name: 'Admin User', email: 'admin@rentsphere.com', role: 'admin' }
-        },
-        {
-          _id: 'listing-4',
-          name: 'Hyundai Creta',
-          title: 'Hyundai Creta',
-          type: 'vehicle',
-          category: 'SUV',
-          location: 'Mumbai, Maharashtra',
-          price: 2799,
-          image: 'https://imgd.aeplcdn.com/640X480/vimages/202603/4428980_133865_4_1772958412062.jpg?qp=80&fit=true',
-          host: { name: 'John Doe', email: 'john@example.com', role: 'user' }
-        }
-      ];
-    }
-
-    res.json(listings);
-  } catch (error) {
-    console.error('Error in /api/admin/listings:', error.message);
-    res.json([
-      {
-        _id: 'listing-1',
-        title: '1 BHK Apartment in Mulund',
-        name: '1 BHK Apartment in Mulund',
-        type: 'property',
-        category: 'Apartment',
-        location: 'Mulund, Mumbai',
-        price: 24000,
-        image: 'https://images.nobroker.in/images/8a9f934490b4cd9d0190b50627be14f9/8a9f934490b4cd9d0190b50627be14f9_96834_892988_medium.jpg',
-        host: { name: 'Admin User', email: 'admin@rentsphere.com', role: 'admin' }
-      },
-      {
-        _id: 'listing-2',
-        title: '2 BHK Flat in Andheri West',
-        name: '2 BHK Flat in Andheri West',
-        type: 'property',
-        category: 'Apartment',
-        location: 'Andheri West, Mumbai',
-        price: 38000,
-        image: 'https://is1-3.housingcdn.com/01c16c28/2d9380714fb183d24422949663c1231b/v0/medium/2_bhk_apartment-for-rent-andheri_west-Mumbai-hall.jpg',
-        host: { name: 'John Doe', email: 'john@example.com', role: 'user' }
-      },
-      {
-        _id: 'listing-3',
-        name: 'Honda City VX',
-        title: 'Honda City VX',
-        type: 'vehicle',
-        category: 'Sedan',
-        location: 'Chennai, Tamil Nadu',
-        price: 2499,
-        image: 'https://images.overdrive.in/wp-content/uploads/2017/09/Hyundai-Verna-vs-Honda-City-Comparo_-97.jpg',
-        host: { name: 'Admin User', email: 'admin@rentsphere.com', role: 'admin' }
-      },
-      {
-        _id: 'listing-4',
-        name: 'Hyundai Creta',
-        title: 'Hyundai Creta',
-        type: 'vehicle',
-        category: 'SUV',
-        location: 'Mumbai, Maharashtra',
-        price: 2799,
-        image: 'https://imgd.aeplcdn.com/640X480/vimages/202603/4428980_133865_4_1772958412062.jpg?qp=80&fit=true',
-        host: { name: 'John Doe', email: 'john@example.com', role: 'user' }
-      }
-    ]);
-  }
+  try { res.json(await Listing.find(activeListings).populate('host', 'name email role').sort({ createdAt: -1 })); }
+  catch { res.status(503).json({ message: 'Unable to load listings.' }); }
 });
 
 // DELETE /api/admin/listings/:id - Delete product by Admin
@@ -394,11 +215,10 @@ router.delete('/listings/:id', adminProtect, async (req, res) => {
     const listing = await Listing.findById(req.params.id);
     if (!listing) return res.status(404).json({ message: 'Listing not found' });
 
-    deleteListingFiles(listing);
-    await Listing.findByIdAndDelete(req.params.id);
+    await removeListing(listing);
     res.json({ message: 'Listing deleted successfully by admin' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(error.status || 503).json({ message: error.status ? error.message : 'Unable to remove listing safely.' });
   }
 });
 
@@ -407,39 +227,7 @@ router.delete('/listings/:id', adminProtect, async (req, res) => {
 // GET /api/admin/owners - List every owner onboarding application (any step/status)
 router.get('/owners', adminProtect, async (req, res) => {
   try {
-    let mongoOwners = [];
-    if (mongoose.connection.readyState === 1) {
-      try {
-        const owners = await User.find({
-          $or: [{ role: 'owner' }, { 'ownerProfile.status': { $ne: 'not_started' } }]
-        }).select('-password').maxTimeMS(2000);
-        mongoOwners = owners.map(u => ({
-          _id: u._id,
-          name: u.name,
-          email: u.email,
-          role: u.role,
-          ownerProfile: u.ownerProfile,
-          createdAt: u.createdAt
-        }));
-      } catch (err) {
-        console.warn('MongoDB query warning in GET /api/admin/owners:', err.message);
-      }
-    }
-
-    const fallbackOwners = listOwnerApps()
-      .filter(a => a.status && a.status !== 'not_started')
-      .filter(a => !mongoOwners.some(o => o.email === a.email))
-      .map(a => ({
-        _id: a._id || a.email,
-        name: a.name || a.email,
-        email: a.email,
-        role: 'owner',
-        ownerProfile: a,
-        createdAt: a.createdAt || new Date()
-      }));
-
-    const combined = [...mongoOwners, ...fallbackOwners];
-
+    const combined = await User.find({ $or: [{ role: 'owner' }, { 'ownerProfile.status': { $nin: ['not_started', null] } }] }).select('-password').lean();
     // Pending applications surface first so admins can action them quickly.
     const statusRank = { pending: 0, in_progress: 1, approved: 2, rejected: 3 };
     combined.sort((a, b) => (statusRank[a.ownerProfile?.status] ?? 4) - (statusRank[b.ownerProfile?.status] ?? 4));
@@ -447,7 +235,7 @@ router.get('/owners', adminProtect, async (req, res) => {
     res.json(combined);
   } catch (error) {
     console.error('Error fetching owner applications:', error.message);
-    res.json([]);
+    res.status(503).json({ message: 'Unable to load owner applications.' });
   }
 });
 
@@ -459,6 +247,8 @@ router.put('/owners/:id/approve', adminProtect, async (req, res) => {
     if (mongoose.connection.readyState === 1 && mongoose.Types.ObjectId.isValid(id)) {
       const user = await User.findById(id);
       if (user) {
+        if (user.role === 'admin') return res.status(400).json({ message: 'Admin accounts cannot be changed through owner review.' });
+        if (user.ownerProfile?.status !== 'pending') return res.status(409).json({ message: 'Only submitted pending owner applications can be approved.' });
         user.ownerProfile = {
           ...(user.ownerProfile?.toObject?.() || {}),
           status: 'approved',
@@ -480,6 +270,23 @@ router.put('/owners/:id/approve', adminProtect, async (req, res) => {
   }
 });
 
+router.put('/owners/:id/revoke', adminProtect, async (req, res) => {
+  try {
+    if (!mongoose.isObjectIdOrHexString(req.params.id)) return res.status(404).json({ message: 'Owner not found.' });
+    const user = await mongoose.connection.transaction(async session => {
+      const target = await User.findById(req.params.id).session(session);
+      if (!target) throw Object.assign(new Error('Owner not found.'), { status: 404 });
+      if (target.role === 'admin') throw Object.assign(new Error('Admin access cannot be revoked through owner review.'), { status: 400 });
+      if (target.role !== 'owner' || target.ownerProfile?.status !== 'approved') throw Object.assign(new Error('Only approved owners can be revoked.'), { status: 409 });
+      target.role = 'user'; target.ownerProfile.status = 'revoked'; target.ownerProfile.reviewedAt = new Date(); target.ownerProfile.reviewedBy = req.user.name;
+      await target.save({ session });
+      await Listing.updateMany({ host: target._id }, { $set: { available: false, availability: 'Unavailable', interestUnavailable: false }, $inc: { bookingRevision: 1 } }, { session });
+      return target;
+    });
+    res.json({ message: 'Owner access revoked. Existing records and reservations are preserved.', ownerProfile: user.ownerProfile });
+  } catch (error) { res.status(error.status || 503).json({ message: error.status ? error.message : 'Unable to revoke owner access safely. Please retry.' }); }
+});
+
 // PUT /api/admin/owners/:id/reject - Reject an owner application with an optional note
 router.put('/owners/:id/reject', adminProtect, async (req, res) => {
   try {
@@ -489,6 +296,7 @@ router.put('/owners/:id/reject', adminProtect, async (req, res) => {
     if (mongoose.connection.readyState === 1 && mongoose.Types.ObjectId.isValid(id)) {
       const user = await User.findById(id);
       if (user) {
+        if (user.role === 'admin') return res.status(400).json({ message: 'Admin accounts cannot be changed through owner review.' });
         user.ownerProfile = {
           ...(user.ownerProfile?.toObject?.() || {}),
           status: 'rejected',
